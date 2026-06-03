@@ -1,7 +1,6 @@
 "use server";
 
 import { supabaseAdmin } from "@/lib/supabase/server";
-import { logGovernanceAction } from "./governance";
 
 export async function getAdminDashboardData() {
   try {
@@ -50,13 +49,6 @@ export async function approveOrganization(reqId: string, orgId: string) {
   try {
     await supabaseAdmin.from("verification_requests").update({ status: "Approved" }).eq("id", reqId);
     await supabaseAdmin.from("organizations").update({ status: "Active" }).eq("id", orgId);
-    
-    // Log Governance Action
-    const { data: { user } } = await supabaseAdmin.auth.getUser();
-    if (user) {
-      await logGovernanceAction("STARTUP_APPROVED", "organization", orgId, user.id, { request_id: reqId });
-    }
-    
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -67,13 +59,6 @@ export async function rejectOrganization(reqId: string, orgId: string) {
   try {
     await supabaseAdmin.from("verification_requests").update({ status: "Rejected" }).eq("id", reqId);
     await supabaseAdmin.from("organizations").update({ status: "Rejected" }).eq("id", orgId);
-    
-    // Log Governance Action
-    const { data: { user } } = await supabaseAdmin.auth.getUser();
-    if (user) {
-      await logGovernanceAction("STARTUP_REJECTED", "organization", orgId, user.id, { request_id: reqId });
-    }
-    
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };

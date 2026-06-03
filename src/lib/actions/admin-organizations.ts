@@ -200,32 +200,32 @@ export async function bulkUpdateOrganizations(orgIds: string[], action: string, 
   }
 }
 
+import { executeAiQuery } from "../ai/fallback-engine";
+
 export async function aiOrganizationSearch(prompt: string) {
-  // MOCK AI FALLBACK LOGIC
-  // Once real API keys (Gemini, Grok, OpenRouter) are added, this function will
-  // pass the 'prompt' to the LLM to extract JSON structural filters.
-  
-  console.log(`[AI Search Mock] Parsing prompt: "${prompt}"`);
-  
-  let extractedFilters: OrgFilters = {};
-  const lowerPrompt = prompt.toLowerCase();
-  
-  if (lowerPrompt.includes("ev ") || lowerPrompt.includes("electric vehicle")) {
-    extractedFilters.domain = "Electric Vehicles"; // Assuming this is the name
-  } else if (lowerPrompt.includes("ai ") || lowerPrompt.includes("artificial intelligence")) {
-    extractedFilters.domain = "Artificial Intelligence";
-  }
+  try {
+    const systemPrompt = `You are an AI assistant for the RTIH Innovation Platform Admin Dashboard.
+Your job is to convert natural language queries into a JSON object matching the following interface:
+{
+  "search"?: string,
+  "domain"?: string,
+  "stage"?: string, // e.g. "Ideation", "Prototype", "MVP", "Validation", "Funding Readiness", "Scale"
+  "riskStatus"?: string, // "Low", "Medium", "High", "Critical"
+  "status"?: string // "Approved", "Pending", "Archived"
+}
+ONLY return raw JSON. No markdown backticks, no explanations. If a field is not specified in the prompt, omit it.`;
 
-  if (lowerPrompt.includes("funding-ready") || lowerPrompt.includes("funding ready")) {
-    extractedFilters.stage = "Funding Readiness";
-  } else if (lowerPrompt.includes("ideation")) {
-    extractedFilters.stage = "Ideation";
-  }
+    const rawResponse = await executeAiQuery(prompt, systemPrompt);
+    
+    // Clean up potential markdown formatting if the model disobeys
+    const cleanJsonStr = rawResponse.replace(/```json/g, '').replace(/```/g, '').trim();
+    const extractedFilters: OrgFilters = JSON.parse(cleanJsonStr);
 
-  if (lowerPrompt.includes("high risk") || lowerPrompt.includes("intervention")) {
-    extractedFilters.riskStatus = "High";
-  }
+    console.log(`[AI Search] Extracted Filters:`, extractedFilters);
 
-  // Actually run the query using the extracted filters
-  return await getOrganizationsPortfolio(extractedFilters, 100);
+    return await getOrganizationsPortfolio(extractedFilters, 100);
+  } catch (err: any) {
+    console.error("[AI Search Error]", err.message);
+    return { success: false, error: err.message };
+  }
 }

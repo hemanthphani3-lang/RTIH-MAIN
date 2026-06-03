@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { BarChart3, Users, Building, ShieldCheck, CheckCircle, XCircle, ShieldAlert, Award, Rocket, Target, Sparkles, Bot } from "lucide-react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import AiHealthWidget from "@/components/admin/AiHealthWidget";
 import { getAdminDashboardData, approveOrganization, rejectOrganization } from "@/lib/actions/admin";
 import { supabase } from "@/lib/supabase/client";
 
@@ -136,6 +137,9 @@ export default function AdminDashboard() {
              </div>
           </div>
         </div>
+
+        {/* AI Health Monitoring */}
+        <AiHealthWidget />
 
         {/* Risk Flags */}
         {riskFlags.length > 0 && (

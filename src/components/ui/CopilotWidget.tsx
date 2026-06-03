@@ -2,30 +2,61 @@
 
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase/client";
-import { queryCopilot } from "@/lib/actions/ai";
+import { askCopilot } from "@/lib/actions/copilot";
 import { MessageSquare, X, Send, Bot, Sparkles, Loader2, Globe } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useCopilotStore } from "@/lib/store/copilotStore";
+import ReactMarkdown from 'react-markdown';
 
 export default function CopilotWidget() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [role, setRole] = useState<string>("Organization");
-  const [messages, setMessages] = useState<{role: "user" | "ai", content: string}[]>([]);
+  const { 
+    isOpen, setIsOpen, 
+    role, setRole, 
+    entityId, setEntityId, 
+    messages, addMessage, 
+    language, setLanguage, 
+    currentModule, setCurrentModule,
+    initSession, logout
+  } = useCopilotStore();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState("en");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Derive Current Module from Pathname
+  useEffect(() => {
+    const parts = pathname.split('/').filter(Boolean);
+    // Path structure is usually /[role]/[module]/...
+    if (parts.length > 1) {
+      setCurrentModule(parts[1]);
+    } else if (parts.length === 1) {
+      setCurrentModule("dashboard");
+    }
+  }, [pathname, setCurrentModule]);
 
   useEffect(() => {
     async function loadRole() {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-      if (profile) setRole(profile.role);
+      if (!user) {
+         logout();
+         return;
+      }
+      
+      setEntityId(user.id);
+      const { data: profile } = await supabase.from("user_profiles").select("roles(name)").eq("id", user.id).single();
+      const rolesData = profile?.roles as any;
+      
+      let currentRole = "Organization";
+      if (rolesData && rolesData.name) {
+          currentRole = rolesData.name;
+          setRole(currentRole);
+      }
+      
+      initSession(user.id, currentRole);
     }
     loadRole();
-  }, []);
+  }, [setEntityId, setRole, initSession, logout]);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -38,29 +69,62 @@ export default function CopilotWidget() {
     return null;
   }
 
-  const handleSend = async (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent, customInput?: string) => {
     e?.preventDefault();
-    if (!input.trim() || loading) return;
+    const userMessage = customInput || input.trim();
+    if (!userMessage || loading) return;
 
-    const userMessage = input.trim();
     setInput("");
-    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+    addMessage({ role: "user", content: userMessage });
     setLoading(true);
 
-    const res = await queryCopilot(userMessage, role, language);
+    const safeRole = role.toLowerCase();
+    const languageHint = language === 'te' ? '(Please reply in Telugu) ' : language === 'hi' ? '(Please reply in Hindi) ' : '';
+    const prompt = languageHint + userMessage;
+
+    // We will slice the last 10 messages for context to avoid token overflow
+    const history = messages.slice(-10);
+
+    // Send the query, but now we also pass the currentModule to the AI to help with context execution!
+    const res = await askCopilot(prompt, safeRole, entityId, currentModule, history);
     
     setLoading(false);
     if (res.success) {
-      setMessages(prev => [...prev, { role: "ai" as const, content: res.response || "I couldn't generate a response." }]);
+      addMessage({ role: "ai", content: res.data || "I couldn't generate a response." });
     } else {
-      setMessages(prev => [...prev, { role: "ai", content: "Sorry, I encountered an error. Please try again." }]);
+      addMessage({ role: "ai", content: res.error || "Sorry, I encountered an error. Please try again." });
     }
   };
 
   const getGreeting = () => {
-    if (language === "te") return `నమస్కారం! నేను మీ ${role} AI అసిస్టెంట్ ని.`;
-    if (language === "hi") return `नमस्ते! मैं आपका ${role} एआई सहायक हूँ।`;
-    return `Hi! I'm your ${role} Copilot. How can I assist you today?`;
+    if (language === "te") return `నమస్కారం. నేను RTIH ఇన్నోవేషన్ కోపిలట్‌ని. నేను మీకు విశ్లేషించడానికి, శోధించడానికి, నివేదికలను రూపొందించడానికి మరియు మీ ప్రాప్యత పరిధిలోని సమాచారాన్ని అన్వేషించడానికి సహాయపడగలను. మీరు ఏమి చేయాలనుకుంటున్నారు?`;
+    if (language === "hi") return `नमस्ते। मैं आरटीआईएच इनोवेशन कोपायलट हूं। मैं विश्लेषण, खोज, रिपोर्ट जनरेट करने और आपके एक्सेस स्कोप के भीतर जानकारी खोजने में आपकी मदद कर सकता हूं। आप क्या करना चाहेंगे?`;
+    return `Hello. I am the RTIH Innovation Copilot. I can help you analyze, search, summarize, generate reports, create documents, recommend actions, and explore information available within your authorized access scope. What would you like to do?`;
+  };
+
+  const getSuggestions = () => {
+    const safeRole = role.toLowerCase();
+    
+    if (safeRole === "manager") {
+      if (currentModule === "mentors") return ["How many mentors are active?", "Generate mentor report", "Show mentor workload", "Find available mentors"];
+      if (currentModule === "startups") return ["Show high-risk startups", "Generate startup report", "Show funding-ready startups", "Analyze startup health"];
+      if (currentModule === "opportunities") return ["Generate opportunity report", "Show pending applications", "Analyze participation"];
+      return ["Show startups below health score 60", "Generate domain report", "Show pending certifications", "Analyze mentor workload", "Identify intervention candidates"];
+    }
+    
+    if (safeRole === "mentor") {
+      return ["Analyze startup progress", "Generate mentorship report", "Show startups needing attention", "Prepare meeting brief", "Generate action items"];
+    }
+    
+    if (safeRole === "admin") {
+      if (currentModule === "dashboard" || currentModule === "") {
+         return ["Generate ecosystem report", "Analyze founder drop-off", "Compare domains", "Show statewide risks"];
+      }
+      return ["Generate statewide report", "Compare domain growth", "Analyze founder drop-off", "Evaluate mentor performance", "Show ecosystem risks"];
+    }
+
+    // Default for Organization
+    return ["What should I do next?", "Analyze my health score", "Recommend opportunities", "Generate funding readiness report", "Create a learning roadmap"];
   };
 
   return (
@@ -84,8 +148,7 @@ export default function CopilotWidget() {
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5 text-white" />
               <div>
-                <h3 className="font-bold text-white text-sm">Innovation Copilot</h3>
-                <p className="text-[10px] text-indigo-200">{role} Mode</p>
+                <h3 className="font-bold text-white text-sm">RTIH Innovation Copilot</h3>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -108,12 +171,35 @@ export default function CopilotWidget() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-black/40">
             {/* Initial Greeting */}
             {messages.length === 0 && (
-              <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4 text-indigo-400" />
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
+                    <Bot className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <div className="bg-white/5 border border-white/10 text-slate-300 p-3 rounded-2xl rounded-tl-none text-sm leading-relaxed">
+                    {getGreeting()}
+                    <div className="mt-3 pt-3 border-t border-white/10">
+                      <p className="text-[10px] text-indigo-300 uppercase tracking-wider mb-2 font-semibold">Capabilities</p>
+                      <div className="flex flex-wrap gap-1">
+                        {["Analyze", "Search", "Generate", "Recommend", "Summarize", "Report"].map(cap => (
+                          <span key={cap} className="text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-400">{cap}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-white/5 border border-white/10 text-slate-300 p-3 rounded-2xl rounded-tl-none text-sm leading-relaxed">
-                  {getGreeting()}
+                <div className="pl-11 pr-2">
+                  <div className="flex flex-col gap-2">
+                    {getSuggestions().map((suggestion, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSend(undefined, suggestion)}
+                        className="text-left text-xs bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 text-indigo-200 p-2.5 rounded-xl transition-colors hover:text-white"
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -130,9 +216,13 @@ export default function CopilotWidget() {
                 <div className={`p-3 rounded-2xl text-sm leading-relaxed max-w-[80%] ${
                   msg.role === "user"
                     ? "bg-indigo-600 text-white rounded-tr-none"
-                    : "bg-white/5 border border-white/10 text-slate-300 rounded-tl-none"
+                    : "bg-white/5 border border-white/10 text-slate-300 rounded-tl-none prose prose-invert prose-sm"
                 }`}>
-                  {msg.content}
+                  {msg.role === "ai" ? (
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  ) : (
+                    msg.content
+                  )}
                 </div>
               </div>
             ))}

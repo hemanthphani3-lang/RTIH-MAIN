@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { supabase } from "@/lib/supabase/client";
 import { getMilestonesForOrg, submitMilestoneEvidence } from "@/lib/actions/milestones";
-import { getActionItems } from "@/lib/actions/mentor-evaluations";
 import { STAGE_BADGES, STAGE_CONFIG, VentureStage } from "@/lib/milestones-config";
 import { Target, CheckCircle2, Clock, AlertCircle, Send, X, Link2, Star, ChevronRight, Zap, Hourglass, Activity, ShieldCheck } from "lucide-react";
 import Link from "next/link";
@@ -16,7 +15,6 @@ export default function OrgMilestonesPage() {
   const [orgId, setOrgId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [actionItems, setActionItems] = useState<any[]>([]);
 
   // Evidence modal state
   const [submittingMilestone, setSubmittingMilestone] = useState<any>(null);
@@ -32,16 +30,12 @@ export default function OrgMilestonesPage() {
     const { data: orgData } = await supabase.from("organizations").select("id").eq("founder_id", user.id).single();
     if (!orgData) { setLoading(false); return; }
     setOrgId(orgData.id);
-    const [res, itemsRes] = await Promise.all([
-      getMilestonesForOrg(orgData.id),
-      getActionItems(orgData.id)
-    ]);
+    const res = await getMilestonesForOrg(orgData.id);
     if (res.success) {
       setData(res.data);
     } else {
       setError(res.error || "Failed to load milestones");
     }
-    if (itemsRes.success) setActionItems(itemsRes.data?.filter((item: any) => item.status !== 'Completed') || []);
     setLoading(false);
   }, []);
 
@@ -298,26 +292,6 @@ export default function OrgMilestonesPage() {
             ) : null}
           </div>
         </div>
-
-        {/* Pending Action Items from Mentor */}
-        {actionItems.length > 0 && (
-          <div className="bg-orange-500/10 border border-orange-500/30 rounded-3xl p-6 md:p-8 mb-8 relative overflow-hidden">
-            <h2 className="text-xl font-extrabold text-orange-400 mb-4 flex items-center gap-2">
-              <AlertCircle className="w-5 h-5" /> Pending Mentor Action Items
-            </h2>
-            <div className="space-y-3">
-              {actionItems.map(item => (
-                <div key={item.id} className="bg-black/40 border border-orange-500/20 p-4 rounded-xl">
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-bold text-white text-sm">{item.title}</h4>
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border bg-white/5 text-slate-300 border-white/10">Priority: {item.priority}</span>
-                  </div>
-                  <p className="text-sm text-slate-300">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Core Milestones */}
         <div>

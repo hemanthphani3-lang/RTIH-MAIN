@@ -57,7 +57,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
       if (connRes.success) setConnStatus(connRes.data);
       
       const countRes = await getPublicConnectionCount(pid);
-      if (countRes.success) setPublicConnectionCount(countRes.count || 0);
+      if (countRes.success) setPublicConnectionCount(countRes.count);
     } else {
       // Own profile — load connections
       const connList = await getMyConnections(uid);
@@ -80,7 +80,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
   const handleSaveProfile = async () => {
     setIsSaving(true);
-    const res = await updateProfile(currentUserId, data?.role, editForm);
+    const res = await updateProfile(currentUserId, editForm);
     if (res.success) {
       await loadProfile(currentUserId, resolvedId);
       setIsEditing(false);

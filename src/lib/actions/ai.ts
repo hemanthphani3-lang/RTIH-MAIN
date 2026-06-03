@@ -17,19 +17,13 @@ async function callLLMEngine(prompt: string, context: any, role: string, languag
   await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate API latency
 
   if (role === "Organization") {
-    if (prompt.toLowerCase().includes("health") || prompt.toLowerCase().includes("ఆరోగ్య")) {
-      return language === "te" 
-        ? "మీ ఆరోగ్య స్కోర్ 65. మీరు ఈ నెలలో 2 మైలురాళ్లను కోల్పోయారు. మీ 'MVP లాంచ్' ని పూర్తి చేయండి." 
-        : "Based on my analysis of your data, your health score is currently 65. You missed 2 milestones this month. I recommend focusing on your 'MVP Launch' action item to improve your score.";
+    if (prompt.toLowerCase().includes("health")) {
+      return "Based on my analysis of your data, your health score is currently 65. You missed 2 milestones this month. I recommend focusing on your 'MVP Launch' action item to improve your score.";
     }
-    if (prompt.toLowerCase().includes("skill") || prompt.toLowerCase().includes("gap") || prompt.toLowerCase().includes("నైపుణ్య")) {
-      return language === "te"
-        ? "మీ డొమైన్ EV టెక్నాలజీ, కానీ మీకు హార్డ్‌వేర్ నైపుణ్యాలు లేవు. సాంకేతిక సలహాదారులను జోడించండి."
-        : "I noticed your domain is EV Technology but you lack hardware validation milestones. You should prioritize adding technical advisors to your team.";
+    if (prompt.toLowerCase().includes("skill") || prompt.toLowerCase().includes("gap")) {
+      return "I noticed your domain is EV Technology but you lack hardware validation milestones. You should prioritize adding technical advisors to your team.";
     }
-    return language === "te"
-      ? "నేను మీ AI కోపైలట్‌ని. మీరు ట్రాక్‌లోనే ఉన్నారు, కానీ దయచేసి మీ KYCని త్వరగా పూర్తి చేయండి."
-      : "As your AI Copilot, I'm analyzing your roadmap and milestones. You are currently on track, but ensure you complete your pending KYC verification soon.";
+    return "As your AI Copilot, I'm analyzing your roadmap and milestones. You are currently on track, but ensure you complete your pending KYC verification soon.";
   }
 
   if (role === "Mentor") {
@@ -95,7 +89,7 @@ export async function queryCopilot(query: string, role: string, language: string
     await supabaseAdmin.from("ai_query_logs").insert({
       user_id: user.id,
       role,
-      prompt: query,
+      query,
       response: aiResponse,
       language
     });

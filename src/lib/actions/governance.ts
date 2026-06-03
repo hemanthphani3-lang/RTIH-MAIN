@@ -8,8 +8,7 @@ export type GovernanceAction =
   | "MANUAL_PROMOTION" 
   | "CERTIFICATE_REVOKED" 
   | "RISK_OVERRIDE" 
-  | "MENTOR_ASSIGNED"
-  | "ACTION_ITEM_ASSIGNED";
+  | "MENTOR_ASSIGNED";
 
 /**
  * Log a high-level governance/compliance event.
