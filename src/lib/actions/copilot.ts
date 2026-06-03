@@ -10,24 +10,48 @@ export async function askCopilot(prompt: string, role: string, entityId?: string
     console.log(`[Copilot] Request received for role: ${role}, Module: ${currentModule || 'dashboard'}, User: ${entityId}`);
 
     // ---------------------------------------------------------
-    // STEP 1: INTENT DETECTION & TOOL SELECTION
+    // STEP 1: FAST HEURISTIC INTENT DETECTION (Zero Latency)
     // ---------------------------------------------------------
-    const intentPrompt = `You are a strict JSON intent analyzer.
+    let intentJSON = { intent: "general_query", params: {} as any };
+    let usedLLMForIntent = false;
+
+    const lowerPrompt = prompt.toLowerCase();
+    if (lowerPrompt.includes("what should i do") || lowerPrompt.includes("next action") || lowerPrompt.includes("pending")) {
+      intentJSON.intent = "WHAT_SHOULD_I_DO_NEXT";
+    } else if (lowerPrompt.includes("how many mentors") || lowerPrompt.includes("count mentors")) {
+      intentJSON.intent = "count_mentors";
+    } else if (lowerPrompt.includes("list mentors") || lowerPrompt.includes("who are the mentors") || lowerPrompt.includes("all mentors")) {
+      intentJSON.intent = "LIST_MENTORS";
+    } else if (lowerPrompt.includes("list startups") || lowerPrompt.includes("assigned to me") || lowerPrompt.includes("my startups")) {
+      intentJSON.intent = "LIST_STARTUPS";
+    } else if (lowerPrompt.includes("health") || lowerPrompt.includes("risk")) {
+      intentJSON.intent = "analyze_health";
+    } else if (lowerPrompt.includes("ecosystem") || lowerPrompt.includes("total startups") || lowerPrompt.includes("report")) {
+      intentJSON.intent = "ecosystem_report";
+    } else if (lowerPrompt.length < 25 && !lowerPrompt.includes("startup") && !lowerPrompt.includes("mentor") && !lowerPrompt.includes("data")) {
+      // Basic conversational queries (hi, thanks, who are you)
+      intentJSON.intent = "general_query";
+    } else {
+      // Fallback to LLM for complex extraction
+      usedLLMForIntent = true;
+      const intentPrompt = `You are a strict JSON intent analyzer.
 Extract the user's intent and parameters based on this prompt: "${prompt}".
-Possible intents: "count_mentors", "search_startups", "analyze_health", "ecosystem_report", "general_query", "LIST_MENTORS", "LIST_STARTUPS", "LIST_ORGANIZATIONS", "STARTUP_SUMMARY", "MENTOR_SUMMARY", "FOUNDER_SUMMARY", "HEALTH_ANALYSIS", "PENDING_APPROVALS", "REPORT_GENERATION", "FUNDING_READINESS", "EVENT_ANALYSIS", "DOCUMENT_ANALYSIS", "NEXT_ACTIONS", "WORKFLOW_STATUS", "OPPORTUNITY_DISCOVERY", "RECRUITMENT_ANALYSIS", "ECOSYSTEM_ANALYSIS", "WHAT_SHOULD_I_DO_NEXT".
+Possible intents: "count_mentors", "search_startups", "analyze_health", "ecosystem_report", "general_query", "LIST_MENTORS", "LIST_STARTUPS", "STARTUP_SUMMARY", "WHAT_SHOULD_I_DO_NEXT".
 Current Role: ${role}
-Current Module: ${currentModule || 'dashboard'}
+Return ONLY a raw JSON object (no markdown formatting).
+Format: { "intent": "string", "params": { "target": "string" } }`;
 
-Return ONLY a raw JSON object (no markdown formatting, no backticks).
-Format: { "intent": "string", "params": { "risk_level": "High" | "health_below": 60 | "stage": "string", "target": "extracted_entity_name" } }`;
-
-    let intentJSON = { intent: "general_query", params: {} };
-    try {
-      const rawIntent = await executeAiQuery(intentPrompt, "You output raw JSON only.", 'organization', history);
-      const cleanedIntent = rawIntent.replace(/```json/g, '').replace(/```/g, '').trim();
-      intentJSON = JSON.parse(cleanedIntent);
-    } catch (e) {
-      console.warn("[Copilot] Intent detection failed, falling back to general query.", e);
+      try {
+        const rawIntent = await executeAiQuery(intentPrompt, "You output raw JSON only.", 'organization', history);
+        const cleanedIntent = rawIntent.replace(/```json/g, '').replace(/```/g, '').trim();
+        intentJSON = JSON.parse(cleanedIntent);
+      } catch (e) {
+        console.warn("[Copilot] Intent detection failed, falling back to general query.", e);
+      }
+    }
+    
+    if (!usedLLMForIntent) {
+       console.log(`[Copilot] Fast Heuristic bypassed LLM. Intent: ${intentJSON.intent}`);
     }
 
     // ---------------------------------------------------------

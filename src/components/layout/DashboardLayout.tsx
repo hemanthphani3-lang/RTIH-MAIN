@@ -1,7 +1,6 @@
 "use client";
 
 import Sidebar from "./Sidebar";
-import CopilotWidget from "../ui/CopilotWidget";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,9 +17,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex-1 ml-64 min-h-screen relative z-10 overflow-y-auto">
         {children}
       </div>
-      
-      {/* Global AI Copilot */}
-      <CopilotWidget />
     </div>
   );
 }
