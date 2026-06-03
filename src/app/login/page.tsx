@@ -2,7 +2,7 @@ import LoginForm from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
   return (
-    <div className="h-screen w-screen flex relative bg-slate-900 overflow-hidden font-sans">
+    <div className="h-screen w-screen flex relative bg-slate-100 dark:bg-slate-900 overflow-hidden font-sans">
       {/* Background Image Setup */}
       <div 
         className="absolute inset-0 z-0 bg-[length:100%_100%] bg-center bg-no-repeat"

@@ -23,7 +23,7 @@ export default function PendingApproval() {
           Our team is currently reviewing your details.
         </p>
         
-        <div className="bg-black/30 backdrop-blur-sm p-5 rounded-xl border border-slate-200 dark:border-white/10 text-sm font-medium text-slate-600 dark:text-slate-300 mt-6">
+        <div className="bg-white dark:bg-black/30 backdrop-blur-sm p-5 rounded-xl border border-slate-200 dark:border-white/10 text-sm font-medium text-slate-600 dark:text-slate-300 mt-6">
           Your account is currently <strong className="text-[#FFD700]">Pending Approval</strong>. <br/>
           You will be able to log in to the secure Dashboard once an administrator approves your request.
         </div>

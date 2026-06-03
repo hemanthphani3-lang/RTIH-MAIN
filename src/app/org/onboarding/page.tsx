@@ -111,7 +111,7 @@ export default function OnboardingPage() {
           </div>
           {[1, 2, 3, 4].map((num) => (
             <div key={num} className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${
-              step >= num ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.5)]" : "bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10"
+              step >= num ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.5)]" : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10"
             }`}>
               {step > num ? <CheckCircle className="w-5 h-5" /> : num}
             </div>
@@ -208,7 +208,7 @@ export default function OnboardingPage() {
                 <select required name="stage" value={formData.stage} onChange={handleChange}
                   className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
                   {VENTURE_STAGES.map(s => (
-                    <option key={s} className="bg-slate-900" value={s}>{s}</option>
+                    <option key={s} className="bg-slate-100 dark:bg-slate-900" value={s}>{s}</option>
                   ))}
                 </select>
                 <p className="text-xs text-slate-500 mt-2 italic">
@@ -243,7 +243,7 @@ export default function OnboardingPage() {
                 <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Primary Domain *</label>
                 <select required name="primaryDomain" value={formData.primaryDomain} onChange={handleChange}
                   className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
-                  {ALL_DOMAINS.map(d => <option key={`p-${d}`} className="bg-slate-900" value={d}>{d}</option>)}
+                  {ALL_DOMAINS.map(d => <option key={`p-${d}`} className="bg-slate-100 dark:bg-slate-900" value={d}>{d}</option>)}
                 </select>
               </div>
 

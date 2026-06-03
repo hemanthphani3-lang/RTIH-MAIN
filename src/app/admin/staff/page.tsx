@@ -164,7 +164,7 @@ export default function AdminStaffPage() {
                       className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer"
                     >
                       {LOCATIONS.map(loc => (
-                        <option key={loc} value={loc} className="bg-slate-900">{loc}</option>
+                        <option key={loc} value={loc} className="bg-slate-100 dark:bg-slate-900">{loc}</option>
                       ))}
                     </select>
                     <MapPin className="absolute right-4 top-3.5 w-4 h-4 text-slate-500 dark:text-slate-400 pointer-events-none" />

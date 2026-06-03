@@ -307,7 +307,7 @@ export default function MentorDashboard() {
       {/* Milestone Review Modal */}
       {reviewingMilestone && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg">
+          <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">Review Milestone</h3>
               <button onClick={() => setReviewingMilestone(null)} className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white"><X className="w-5 h-5" /></button>

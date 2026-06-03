@@ -156,7 +156,7 @@ export default function OrgRoadmapPage() {
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border-2 transition-all ${
                       isCompleted ? "bg-[#FFD700] border-[#FFD700] text-black shadow-[0_0_20px_rgba(255,215,0,0.4)]" :
                       isCurrent ? "bg-indigo-500/20 border-indigo-400 text-indigo-400" :
-                      "bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600"
+                      "bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600"
                     }`}>
                       {isCompleted ? <CheckCircle2 className="w-6 h-6" /> : isCurrent ? <Rocket className="w-5 h-5 animate-pulse" /> : <Lock className="w-4 h-4" />}
                     </div>
@@ -250,7 +250,7 @@ export default function OrgRoadmapPage() {
         {/* Certification Modal */}
         {showCertModal && nextStage && nextStageConfig && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">Apply for {nextStage} Certification</h3>
                 <button onClick={() => setShowCertModal(false)} className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white"><X className="w-5 h-5" /></button>

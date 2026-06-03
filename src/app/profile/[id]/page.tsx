@@ -245,22 +245,22 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         {/* Social Proof & Metrics (Founder Only) */}
         {role === "Organization" && org && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
+            <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <ShieldCheck className="w-6 h-6 text-[#FFD700] mx-auto mb-2" />
               <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Current Stage</p>
               <p className="text-lg font-extrabold text-slate-900 dark:text-white">{org.verified_stage || org.stage}</p>
             </div>
-            <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
+            <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Activity className="w-6 h-6 text-pink-400 mx-auto mb-2" />
               <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Health Score</p>
               <p className="text-lg font-extrabold text-slate-900 dark:text-white">{org.health_score ?? "N/A"}</p>
             </div>
-            <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
+            <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Award className="w-6 h-6 text-purple-400 mx-auto mb-2" />
               <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Badges Earned</p>
               <p className="text-lg font-extrabold text-slate-900 dark:text-white">{earnedBadges.length}</p>
             </div>
-            <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
+            <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Target className="w-6 h-6 text-green-400 mx-auto mb-2" />
               <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Milestones</p>
               <p className="text-lg font-extrabold text-slate-900 dark:text-white">{(org as any)?.completed_milestones || (earnedBadges.length * 8)}+</p>
@@ -294,7 +294,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
         {/* Founder Achievements */}
         {role === "Organization" && org && (
-          <div className="bg-gradient-to-br from-[#0f172a] to-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl">
+          <div className="bg-gradient-to-br from-[#0f172a] to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-xl">
             <h2 className="text-xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
               <Sparkles className="w-6 h-6 text-[#FFD700]" /> Founder Achievements
             </h2>
@@ -325,7 +325,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4">Ecosystem Certifications</h3>
                   <div className="space-y-2">
                     {org.certificates.map((cert: any, i: number) => (
-                      <div key={i} className="flex items-center justify-between bg-black/30 border border-white/5 rounded-xl px-5 py-4">
+                      <div key={i} className="flex items-center justify-between bg-white dark:bg-black/30 border border-white/5 rounded-xl px-5 py-4">
                         <div className="flex items-center gap-3">
                           <Award className="w-5 h-5 text-indigo-400" />
                           <p className="text-sm font-bold text-slate-900 dark:text-white">{cert.certificate_type}</p>
@@ -526,7 +526,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   {accepted.map(conn => {
                     const contact = getContact(conn);
                     return (
-                      <div key={conn.id} className="p-6 bg-[#0f172a] flex items-center justify-between hover:bg-slate-800 transition-colors group">
+                      <div key={conn.id} className="p-6 bg-[#0f172a] flex items-center justify-between hover:bg-slate-100 dark:bg-slate-800 transition-colors group">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center font-bold text-indigo-400 text-xl shrink-0 group-hover:scale-105 transition-transform">
                             {(contact as any)?.full_name?.[0]}
@@ -538,7 +538,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                         </div>
                         <div className="flex gap-2">
                           <Link href={`/profile/${(contact as any)?.id}`}
-                            className="text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white font-bold border border-slate-700 px-3 py-2 rounded-xl hover:bg-slate-700 transition-all shadow-sm">
+                            className="text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white font-bold border border-slate-300 dark:border-slate-700 px-3 py-2 rounded-xl hover:bg-slate-700 transition-all shadow-sm">
                             Profile
                           </Link>
                           <Link href={`/messages?with=${(contact as any)?.id}`}
@@ -566,7 +566,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                     return (
                       <div key={conn.id} className="px-6 py-4 flex items-center justify-between hover:bg-white dark:bg-white/5 transition-colors">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-center text-sm font-bold text-slate-500 dark:text-slate-400">
+                          <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl flex items-center justify-center text-sm font-bold text-slate-500 dark:text-slate-400">
                             {(contact as any)?.full_name?.[0]}
                           </div>
                           <p className="text-sm font-bold text-slate-900 dark:text-white">{(contact as any)?.full_name}</p>
@@ -591,7 +591,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         
         return (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" onClick={() => setReviewProfileId(null)}>
-            <div className="bg-slate-900 border border-slate-200 dark:border-white/10 w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-200 relative" onClick={e => e.stopPropagation()}>
+            <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-200 relative" onClick={e => e.stopPropagation()}>
               <button onClick={() => setReviewProfileId(null)} className="absolute top-4 right-4 p-2 hover:bg-white/60 dark:bg-white/10 rounded-full transition-colors">
                 <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
               </button>
@@ -622,7 +622,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                 )}
                 
                 {(isOrg && reviewContact.description) && (
-                  <div className="bg-black/30 rounded-xl p-4 mb-6 border border-white/5 w-full">
+                  <div className="bg-white dark:bg-black/30 rounded-xl p-4 mb-6 border border-white/5 w-full">
                     <p className="text-sm text-slate-600 dark:text-slate-300 italic">
                       "{reviewContact.description}"
                     </p>

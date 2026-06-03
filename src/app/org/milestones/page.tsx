@@ -130,7 +130,7 @@ export default function OrgMilestonesPage() {
         isVerified ? "border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.05)]" :
         isRejected ? "border-red-500/30" :
         isPending ? "border-yellow-500/20" :
-        "border-slate-800"
+        "border-slate-200 dark:border-slate-800"
       }`}>
         <div className="shrink-0 mt-1">{statusIcon(m.displayStatus)}</div>
         <div className="flex-1 min-w-0">
@@ -248,7 +248,7 @@ export default function OrgMilestonesPage() {
           </div>
 
           {/* Next Recommended Action */}
-          <div className="md:col-span-4 bg-[#1e293b] border border-slate-700 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+          <div className="md:col-span-4 bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
@@ -301,7 +301,7 @@ export default function OrgMilestonesPage() {
           </h2>
           <div className="space-y-4">
             {data?.core?.length === 0 ? (
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-12 text-center text-slate-500 font-medium">No milestones found for this stage.</div>
+              <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-12 text-center text-slate-500 font-medium">No milestones found for this stage.</div>
             ) : (
               data?.core?.map((m: any) => <MilestoneCard key={m.id} m={m} />)
             )}
@@ -313,7 +313,7 @@ export default function OrgMilestonesPage() {
           <div className="pt-8 border-t border-white/5">
             <h2 className="text-xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
               <Star className="w-5 h-5 text-purple-400" /> Optional Milestones
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium bg-slate-900 px-3 py-1 rounded-full border border-slate-800">Boost your Venture Health</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium bg-slate-100 dark:bg-slate-900 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800">Boost your Venture Health</span>
             </h2>
             <div className="space-y-4 opacity-80 hover:opacity-100 transition-opacity">
               {data?.optional?.map((m: any) => <MilestoneCard key={m.id} m={m} />)}
@@ -326,7 +326,7 @@ export default function OrgMilestonesPage() {
       {/* Evidence Modal */}
       {submittingMilestone && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl p-8 w-full max-w-lg shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">Complete Milestone</h3>
               <button onClick={() => setSubmittingMilestone(null)} className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white bg-white dark:bg-white/5 p-2 rounded-full transition-colors"><X className="w-5 h-5" /></button>

@@ -105,7 +105,7 @@ function AdminOverridesPage() {
 
       {overrideOrgId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-red-500/30 rounded-3xl p-8 w-full max-w-md shadow-[0_0_50px_rgba(239,68,68,0.15)]">
+          <div className="bg-slate-100 dark:bg-slate-900 border border-red-500/30 rounded-3xl p-8 w-full max-w-md shadow-[0_0_50px_rgba(239,68,68,0.15)]">
             <h3 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2 mb-4"><ShieldAlert className="w-5 h-5 text-red-500" /> Confirm Override</h3>
             <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">You are overriding the stage for <span className="text-slate-900 dark:text-white font-bold">{orgs.find(o => o.id === overrideOrgId)?.name}</span>. This action will bypass all normal verification flows.</p>
             

@@ -105,7 +105,7 @@ export default function OrgDashboard() {
                   {i > 0 && (
                     <div className={`absolute left-0 top-5 -translate-y-1/2 w-full h-0.5 ${isCompleted ? "bg-[#FFD700]" : "bg-white/60 dark:bg-white/10"}`} style={{ left: "-50%", width: "100%" }} />
                   )}
-                  <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${isCompleted ? "bg-[#FFD700] border-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.4)]" : "bg-slate-800 border-slate-200 dark:border-white/10 text-slate-500"}`}>
+                  <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${isCompleted ? "bg-[#FFD700] border-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.4)]" : "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-white/10 text-slate-500"}`}>
                     {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : i + 1}
                   </div>
                   <p className="text-xs font-bold text-slate-900 dark:text-white mt-3">{step.label}</p>

@@ -140,7 +140,7 @@ export default function AdminOrganizationsPage() {
             <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">Control center for all organizations in the ecosystem.</p>
           </div>
           <div className="flex gap-3">
-            <button onClick={exportCSV} className="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+            <button onClick={exportCSV} className="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
               <ArrowDownToLine className="w-4 h-4" /> Export CSV
             </button>
             {selectedRowIds.size > 0 && (
@@ -177,7 +177,7 @@ export default function AdminOrganizationsPage() {
         </div>
 
         {/* AI Search & Filtering */}
-        <div className="bg-[#1e293b] border border-slate-700/50 rounded-3xl p-6 shadow-xl space-y-4">
+        <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-3xl p-6 shadow-xl space-y-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Sparkles className="h-5 w-5 text-indigo-400 animate-pulse" />
@@ -198,38 +198,38 @@ export default function AdminOrganizationsPage() {
           
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-bold"><Filter className="w-4 h-4"/> Filters</div>
-            <select value={filters.stage} onChange={e => setFilters({...filters, stage: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
+            <select value={filters.stage} onChange={e => setFilters({...filters, stage: e.target.value})} className="bg-white dark:bg-black/30 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Stages</option>
               {Object.keys(STAGE_BADGES).map(s => <option key={s} value={s}>{s}</option>)}
             </select>
-            <select value={filters.riskStatus} onChange={e => setFilters({...filters, riskStatus: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
+            <select value={filters.riskStatus} onChange={e => setFilters({...filters, riskStatus: e.target.value})} className="bg-white dark:bg-black/30 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Risk Levels</option>
               <option value="Low">Low Risk</option>
               <option value="Medium">Medium Risk</option>
               <option value="High">High Risk</option>
               <option value="Critical">Critical Risk</option>
             </select>
-            <select value={filters.status} onChange={e => setFilters({...filters, status: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
+            <select value={filters.status} onChange={e => setFilters({...filters, status: e.target.value})} className="bg-white dark:bg-black/30 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Statuses</option>
               <option value="Approved">Active (Approved)</option>
               <option value="Pending">Pending</option>
               <option value="Archived">Archived</option>
             </select>
-            <input value={filters.search} onChange={e => setFilters({...filters, search: e.target.value})} placeholder="Search name/founder..." className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white flex-1 min-w-[200px]" />
+            <input value={filters.search} onChange={e => setFilters({...filters, search: e.target.value})} placeholder="Search name/founder..." className="bg-white dark:bg-black/30 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white flex-1 min-w-[200px]" />
           </div>
         </div>
 
         {/* Datatable */}
-        <div className="bg-[#0f172a] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-900 border-b border-slate-800 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-bold">
+                <tr className="bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-bold">
                   <th className="p-4 w-12 text-center">
                     <input type="checkbox" onChange={(e) => {
                       if(e.target.checked) setSelectedRowIds(new Set(orgs.map(o => o.id)));
                       else setSelectedRowIds(new Set());
-                    }} checked={orgs.length > 0 && selectedRowIds.size === orgs.length} className="rounded border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
+                    }} checked={orgs.length > 0 && selectedRowIds.size === orgs.length} className="rounded border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
                   </th>
                   <th className="p-4">Organization</th>
                   <th className="p-4">Stage</th>
@@ -246,9 +246,9 @@ export default function AdminOrganizationsPage() {
                   <tr><td colSpan={7} className="p-16 text-center text-slate-500"><Building2 className="w-12 h-12 mx-auto mb-3 opacity-20" /> No organizations found matching criteria.</td></tr>
                 ) : (
                   orgs.map((org) => (
-                    <tr key={org.id} className={`hover:bg-slate-800/50 transition-colors ${selectedRowIds.has(org.id) ? 'bg-indigo-900/10' : ''}`}>
+                    <tr key={org.id} className={`hover:bg-slate-50 dark:bg-slate-800/50 transition-colors ${selectedRowIds.has(org.id) ? 'bg-indigo-900/10' : ''}`}>
                       <td className="p-4 text-center">
-                        <input type="checkbox" checked={selectedRowIds.has(org.id)} onChange={() => toggleRowSelection(org.id)} className="rounded border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
+                        <input type="checkbox" checked={selectedRowIds.has(org.id)} onChange={() => toggleRowSelection(org.id)} className="rounded border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -303,14 +303,14 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {/* Organization Detail Drawer */}
-      <div className={`fixed inset-y-0 right-0 w-full max-w-3xl bg-[#0f172a] shadow-[-10px_0_50px_rgba(0,0,0,0.5)] border-l border-slate-700 transform transition-transform duration-500 z-[100] flex flex-col ${selectedOrgId ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-y-0 right-0 w-full max-w-3xl bg-[#0f172a] shadow-[-10px_0_50px_rgba(0,0,0,0.5)] border-l border-slate-300 dark:border-slate-700 transform transition-transform duration-500 z-[100] flex flex-col ${selectedOrgId ? 'translate-x-0' : 'translate-x-full'}`}>
         {drawerLoading ? (
           <div className="h-full flex items-center justify-center">
             <div className="animate-spin w-10 h-10 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full" />
           </div>
         ) : drawerData && (
           <>
-            <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-10 sticky top-0">
+            <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-10 sticky top-0">
               <div>
                 <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
                   {drawerData.name}
@@ -329,11 +329,11 @@ export default function AdminOrganizationsPage() {
               
               {/* Grid 1: Basic Info & Health */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-700/50">
+                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Current Stage</p>
                   <p className="text-xl font-extrabold text-slate-900 dark:text-white">{drawerData.verified_stage || 'Ideation'}</p>
                 </div>
-                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-700/50">
+                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Health Score</p>
                   <p className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                     {drawerData.health_score || 0} 
@@ -396,7 +396,7 @@ export default function AdminOrganizationsPage() {
                   {drawerData.timeline?.length === 0 ? <p className="text-slate-500 text-sm pl-8">No timeline events recorded.</p> : 
                     drawerData.timeline.map((t: any, i: number) => (
                       <div key={t.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                        <div className="flex items-center justify-center w-5 h-5 rounded-full border border-indigo-500 bg-slate-900 text-indigo-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <div className="flex items-center justify-center w-5 h-5 rounded-full border border-indigo-500 bg-slate-100 dark:bg-slate-900 text-indigo-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                           <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>
                         </div>
                         <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white dark:bg-white/5 p-3 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
