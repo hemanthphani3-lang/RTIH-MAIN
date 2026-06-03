@@ -57,7 +57,7 @@ export default function ManagerAssignmentsPage() {
     setAssigning(false);
   };
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Assignments...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Assignments...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

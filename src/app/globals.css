@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html.light-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background: white;
+}
+
+html.light-mode img,
+html.light-mode video,
+html.light-mode .preserve-colors {
+  filter: invert(1) hue-rotate(180deg);
+}

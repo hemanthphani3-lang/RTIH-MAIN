@@ -82,7 +82,7 @@ export default function ManagerMentorsPage() {
     setCreating(false);
   };
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Mentors...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Mentors...</div></DashboardLayout>;
 
   const allowedDomains = managerLocation ? LOCATION_DOMAINS[managerLocation] : [];
 

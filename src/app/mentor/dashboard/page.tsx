@@ -61,7 +61,7 @@ export default function MentorDashboard() {
     return () => { supabase.removeChannel(ch); };
   }, [loadData]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading your portfolio...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading your portfolio...</div></DashboardLayout>;
 
   const usedCapacity = assignments.length;
   const maxCapacity = mentorRecord?.max_capacity || 5;

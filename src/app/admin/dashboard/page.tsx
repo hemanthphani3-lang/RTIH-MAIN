@@ -55,7 +55,7 @@ export default function AdminDashboard() {
     if (!res.success) alert("Error: " + res.error);
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center text-white">Loading Admin Dashboard...</div>;
+  if (loading) return <DashboardLayout><div className="min-h-screen flex items-center justify-center text-white">Loading Admin Dashboard...</div></DashboardLayout>;
 
   const avgHealth = healthScores.length > 0
     ? Math.round(healthScores.reduce((acc, h) => acc + h.current_score, 0) / healthScores.length)

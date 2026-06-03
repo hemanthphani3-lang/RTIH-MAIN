@@ -79,7 +79,7 @@ export default function AdminStaffPage() {
     setCreating(false);
   };
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Staff Directory...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Staff Directory...</div></DashboardLayout>;
 
   const displayed = activeTab === "Mentor" ? mentors : managers;
 

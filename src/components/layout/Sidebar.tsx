@@ -2,15 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
-import { LayoutDashboard, LogOut, Settings, Building, Users, FileText, Calendar, Map, Target, Link2, Rocket, Zap, Network, MessageSquare, Bell, BarChart2, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, LogOut, Settings, Building, Users, FileText, Calendar, Map, Target, Link2, Rocket, Zap, Network, MessageSquare, Bell, BarChart2, ShieldCheck, Moon, Sun } from "lucide-react";
 
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Sidebar() {
   const [role, setRole] = useState<string | null>(null);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [isLightMode, setIsLightMode] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        setIsLightMode(true);
+        document.documentElement.classList.add('light-mode');
+      }
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newMode = !isLightMode;
+    setIsLightMode(newMode);
+    if (newMode) {
+      document.documentElement.classList.add('light-mode');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark');
+    }
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -122,7 +146,7 @@ export default function Sidebar() {
           const Icon = link.icon;
           const active = pathname === link.path || (pathname.startsWith(link.path + "/") && link.path.length > 1 && link.path !== "/settings");
           return (
-            <a key={link.name} href={link.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium relative ${active ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.3)]" : "text-slate-300 hover:bg-white/5 hover:text-white"}`}>
+            <Link key={link.name} href={link.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium relative ${active ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.3)]" : "text-slate-300 hover:bg-white/5 hover:text-white"}`}>
               <div className="relative">
                 <Icon className="w-5 h-5" />
                 {link.name === "Messages" && unreadCount > 0 && (
@@ -135,12 +159,16 @@ export default function Sidebar() {
                   {unreadCount}
                 </span>
               )}
-            </a>
+            </Link>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-white/10">
+      <div className="p-4 border-t border-white/10 flex flex-col gap-2">
+        <button onClick={toggleTheme} className="flex items-center gap-3 w-full px-4 py-3 font-medium text-slate-300 hover:bg-white/5 hover:text-white rounded-xl transition-all preserve-colors">
+          {isLightMode ? <Moon className="w-5 h-5 text-indigo-400" /> : <Sun className="w-5 h-5 text-yellow-400" />} 
+          {isLightMode ? "Dark Mode" : "Light Mode"}
+        </button>
         <button onClick={handleLogout} className="flex items-center gap-3 w-full px-4 py-3 font-medium text-slate-300 hover:bg-red-500/10 hover:text-red-400 rounded-xl transition-all">
           <LogOut className="w-5 h-5" /> Sign Out
         </button>

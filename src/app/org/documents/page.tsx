@@ -26,7 +26,7 @@ export default function OrgDocumentsPage() {
     return () => { supabase.removeChannel(ch); };
   }, [loadData]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Documents...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Documents...</div></DashboardLayout>;
   if (!org) return <div className="p-8 text-center text-white">No organization profile found.</div>;
 
   return (

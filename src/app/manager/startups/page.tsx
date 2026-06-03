@@ -81,7 +81,7 @@ export default function ManagerStartupsPage() {
     await loadData();
   };
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Pending Startups...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Pending Startups...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

@@ -179,7 +179,7 @@ export default function ManagerHackathons() {
 
   const getMagicLink = (token: string) => `${typeof window !== "undefined" ? window.location.origin : ""}/judge/${token}`;
 
-  if (loading) return <div className="p-8 text-center text-white animate-pulse">Loading your hackathons...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white animate-pulse">Loading your hackathons...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

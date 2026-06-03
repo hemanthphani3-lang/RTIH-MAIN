@@ -27,7 +27,7 @@ export default function OrgApplicationsPage() {
     return () => { supabase.removeChannel(ch); };
   }, [loadData]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Applications...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Applications...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

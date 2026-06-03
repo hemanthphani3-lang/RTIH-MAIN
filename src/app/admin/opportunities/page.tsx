@@ -30,7 +30,7 @@ export default function AdminOpportunitiesAnalyticsPage() {
     return () => { supabase.removeChannel(ch); };
   }, [loadData]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Ecosystem Data...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Ecosystem Data...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

@@ -82,7 +82,7 @@ export default function MentorStartupDetail() {
     loadData();
   };
 
-  if (loading) return <div className="p-8 text-center text-gray-500">Loading Startup Details...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-gray-500">Loading Startup Details...</div></DashboardLayout>;
   if (!org) return <div className="p-8 text-center text-red-500">Startup not found or unauthorized.</div>;
 
   return (

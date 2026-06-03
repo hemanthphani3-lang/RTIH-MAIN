@@ -35,7 +35,7 @@ export default function OrgOpportunityDetailPage() {
     loadData();
   }, [id]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Opportunity Details...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Opportunity Details...</div></DashboardLayout>;
   if (!opportunity) return <div className="p-8 text-center text-white">Opportunity not found.</div>;
 
   return (

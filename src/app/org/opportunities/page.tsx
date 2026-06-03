@@ -32,7 +32,7 @@ export default function OrgOpportunitiesHub() {
 
   const filteredOpps = opportunities.filter(o => o.title.toLowerCase().includes(search.toLowerCase()) || o.type.toLowerCase().includes(search.toLowerCase()));
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Ecosystem Opportunities...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Ecosystem Opportunities...</div></DashboardLayout>;
 
   return (
     <DashboardLayout>

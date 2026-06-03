@@ -47,7 +47,7 @@ export default function OrgDashboard() {
     return () => { supabase.removeChannel(ch); };
   }, [loadData]);
 
-  if (loading) return <div className="p-8 text-center text-white">Loading your profile...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading your profile...</div></DashboardLayout>;
 
   if (!org) return (
     <DashboardLayout>

@@ -73,7 +73,7 @@ export default function ManagerDashboard() {
     else alert("Error: " + res.error);
   };
 
-  if (loading) return <div className="p-8 text-center text-white">Loading Manager Intelligence...</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Manager Intelligence...</div></DashboardLayout>;
 
   const healthy = healthScores.filter(h => h.status === 'Healthy' || h.status === 'Growing').length;
   const atRisk = healthScores.filter(h => h.status === 'At Risk' || h.status === 'Critical').length;
