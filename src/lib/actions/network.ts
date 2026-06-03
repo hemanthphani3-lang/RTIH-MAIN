@@ -7,15 +7,23 @@ export async function searchProfiles(filters: { query?: string, type?: string, s
     let results: any[] = [];
     
     if (!filters.type || filters.type === 'all' || filters.type === 'Organization') {
-      let q = supabaseAdmin.from("organizations").select("id, founder_id, name, stage, domain_id, status");
+      let q = supabaseAdmin.from("organizations").select(`
+        id, founder_id, name, stage, domain_id, status,
+        domains (name),
+        user_profiles (full_name)
+      `);
       if (filters.stage) q = q.eq("stage", filters.stage);
       if (filters.query) q = q.ilike("name", `%${filters.query}%`);
       const { data } = await q;
-      if (data) results = [...results, ...data.map(d => ({ ...d, _type: 'Organization' }))];
+      if (data) results = [...results, ...data.map((d: any) => ({ 
+        ...d, 
+        _type: 'Organization',
+        _domain: d.domains?.name
+      }))];
     }
 
     if (!filters.type || filters.type === 'all' || filters.type === 'Mentor') {
-      let q = supabaseAdmin.from("mentors").select("id, user_id, bio, expertise, availability_status, user_profiles!mentors_user_id_fkey(full_name)");
+      let q = supabaseAdmin.from("mentors").select("id, user_id, bio, expertise, availability_status, user_profiles(full_name)");
       const { data } = await q;
       if (data) results = [...results, ...data.map(d => ({ ...d, _type: 'Mentor' }))];
     }
