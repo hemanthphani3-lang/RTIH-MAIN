@@ -17,7 +17,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   background: var(--background);
