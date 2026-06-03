@@ -1,6 +1,7 @@
 "use server";
 
 import { supabaseAdmin } from "../supabase/server";
+import { logGovernanceAction } from "./governance";
 
 export async function getActionItems(orgId: string) {
   try {
@@ -45,6 +46,16 @@ export async function createActionItem(orgId: string, mentorId: string, payload:
         const newScore = Math.max(0, (org.health_score || 100) - penalty);
         await supabaseAdmin.from('organizations').update({ health_score: newScore }).eq('id', orgId);
       }
+    }
+    
+    // Log Governance Action
+    const { data: { user } } = await supabaseAdmin.auth.getUser();
+    if (user) {
+      await logGovernanceAction("ACTION_ITEM_ASSIGNED", "organization", orgId, user.id, { 
+        action_item_id: data?.id,
+        mentor_id: mentorId,
+        priority: payload.priority
+      });
     }
 
     return { success: true, data };

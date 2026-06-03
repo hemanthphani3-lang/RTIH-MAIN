@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { getEcosystemMetrics, getHubAndDomainIntelligence } from "@/lib/actions/analytics";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { BarChart, Bar, Line, ComposedChart, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { Users, TrendingUp, AlertTriangle, CheckCircle, ChevronLeft } from "lucide-react";
 
 export default function ExecutiveDashboardPage() {
@@ -151,25 +151,24 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-6 h-80 flex flex-col">
-            <h3 className="font-extrabold text-lg text-white mb-6 flex items-center gap-2"><CheckCircle className="w-5 h-5 text-purple-400" /> Startup Funnel (Stage)</h3>
+            <h3 className="font-extrabold text-lg text-white mb-6 flex items-center gap-2"><CheckCircle className="w-5 h-5 text-purple-400" /> Startup Funnel & Drop-Offs</h3>
             <div className="flex-1 min-h-0">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={metrics?.stageDistribution}
-                    cx="50%" cy="50%"
-                    innerRadius={70}
-                    outerRadius={100}
-                    paddingAngle={5}
-                    dataKey="value"
-                    stroke="none"
-                  >
-                    {metrics?.stageDistribution.map((entry: any, index: number) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip contentStyle={{backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff'}} itemStyle={{color: '#fff'}} />
-                </PieChart>
+                <ComposedChart data={metrics?.stageDistribution} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
+                  <YAxis yAxisId="left" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
+                  <YAxis yAxisId="right" orientation="right" stroke="#f43f5e" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} />
+                  <Tooltip 
+                    cursor={{fill: 'rgba(255,255,255,0.05)'}} 
+                    contentStyle={{backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff'}} 
+                    formatter={(value, name) => {
+                      if (name === "dropOffRate") return [`${value}%`, "Drop-Off Rate"];
+                      return [value, "Startups"];
+                    }}
+                  />
+                  <Bar yAxisId="left" dataKey="value" fill="#a855f7" radius={[4, 4, 0, 0]} barSize={30} />
+                  <Line yAxisId="right" type="monotone" dataKey="dropOffRate" stroke="#f43f5e" strokeWidth={3} dot={{ r: 4, fill: '#f43f5e' }} activeDot={{ r: 6 }} />
+                </ComposedChart>
               </ResponsiveContainer>
             </div>
           </div>

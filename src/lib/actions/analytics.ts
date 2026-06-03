@@ -2,6 +2,7 @@
 
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { LOCATION_DOMAINS, LocationType } from "@/lib/constants";
+import { STAGE_CONFIG } from "@/lib/milestones-config";
 
 // Reverse mapping to find location by domain
 const domainToLocationMap: Record<string, string> = {};
@@ -25,10 +26,26 @@ export async function getEcosystemMetrics() {
 
     // Fetch stage distribution
     const { data: orgs } = await supabaseAdmin.from("organizations").select("stage");
-    const stageDistribution = orgs?.reduce((acc: any, org) => {
-      acc[org.stage] = (acc[org.stage] || 0) + 1;
+    const stageCount = orgs?.reduce((acc: any, org) => {
+      acc[org.stage || "Ideation"] = (acc[org.stage || "Ideation"] || 0) + 1;
       return acc;
     }, {});
+
+    // Compute conversion and drop-off rates across the standardized stages
+    let previousCount = orgs?.length || 0;
+    const stageDistribution = STAGE_CONFIG.map(s => {
+      const count = stageCount[s.stage] || 0;
+      const conversionRate = previousCount > 0 ? Math.round((count / previousCount) * 100) : 0;
+      const dropOffRate = 100 - conversionRate;
+      previousCount = count; // For next stage comparison
+      
+      return { 
+        name: s.stage, 
+        value: count,
+        conversionRate,
+        dropOffRate: dropOffRate > 0 && dropOffRate < 100 ? dropOffRate : 0 
+      };
+    });
 
     return {
       success: true,
@@ -37,7 +54,7 @@ export async function getEcosystemMetrics() {
         activeOrgs: activeOrgs || 0,
         graduatedOrgs: graduatedOrgs || 0,
         totalMentors: totalMentors || 0,
-        stageDistribution: Object.entries(stageDistribution || {}).map(([name, value]) => ({ name, value }))
+        stageDistribution
       }
     };
   } catch (err: any) {
