@@ -41,11 +41,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="flex min-h-screen relative overflow-hidden">
       {/* Global Dashboard Background */}
       <div 
-        className="fixed inset-0 z-0 bg-[length:100%_100%] bg-center bg-no-repeat preserve-colors"
+        className="fixed inset-0 z-0 bg-[length:100%_100%] bg-center bg-no-repeat global-bg"
         style={{ backgroundImage: 'url("/dashboard.png")' }}
       ></div>
       {/* Glassmorphic Overlay to ensure dashboard cards remain readable */}
-      <div className="fixed inset-0 z-0 bg-slate-900/10 backdrop-blur-[4px] pointer-events-none"></div>
+      <div className="fixed inset-0 z-0 bg-slate-900/10 backdrop-blur-[4px] pointer-events-none global-bg"></div>
 
       <Sidebar />
       

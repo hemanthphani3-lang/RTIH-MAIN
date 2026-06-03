@@ -26,12 +26,21 @@ body {
 }
 
 html.light-mode {
-  filter: invert(1) hue-rotate(180deg);
-  background: white;
+  background: white !important;
 }
 
-html.light-mode img,
-html.light-mode video,
-html.light-mode .preserve-colors {
+body.light-mode {
   filter: invert(1) hue-rotate(180deg);
+  background: white !important;
+}
+
+body.light-mode img,
+body.light-mode video,
+body.light-mode .preserve-colors {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.light-mode .global-bg {
+  background-image: none !important;
+  background-color: #ffffff !important;
 }
