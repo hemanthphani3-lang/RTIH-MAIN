@@ -102,16 +102,16 @@ export default function OnboardingPage() {
     <div className="min-h-screen bg-[#020617] relative flex items-center justify-center p-6">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#020617] to-[#020617] z-0"></div>
       
-      <div className="w-full max-w-4xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 z-10 animate-in fade-in zoom-in-95 duration-500 shadow-2xl">
+      <div className="w-full max-w-4xl bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-12 z-10 animate-in fade-in zoom-in-95 duration-500 shadow-2xl">
         
         {/* Progress Tracker */}
         <div className="flex items-center justify-between mb-12 relative">
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-white/10 rounded-full z-0">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-white/60 dark:bg-white/10 rounded-full z-0">
             <div className="h-full bg-[#FFD700] rounded-full transition-all duration-500" style={{ width: `${((step - 1) / 3) * 100}%` }}></div>
           </div>
           {[1, 2, 3, 4].map((num) => (
             <div key={num} className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${
-              step >= num ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.5)]" : "bg-slate-800 text-slate-400 border border-white/10"
+              step >= num ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.5)]" : "bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10"
             }`}>
               {step > num ? <CheckCircle className="w-5 h-5" /> : num}
             </div>
@@ -119,10 +119,10 @@ export default function OnboardingPage() {
         </div>
 
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center justify-center gap-3">
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center justify-center gap-3">
             <Rocket className="w-8 h-8 text-[#FFD700]" /> Join the RTIH Ecosystem
           </h1>
-          <p className="text-slate-400 mt-2">Scale your innovation with dedicated mentorship and resources.</p>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Scale your innovation with dedicated mentorship and resources.</p>
         </div>
 
         {error && (
@@ -136,27 +136,27 @@ export default function OnboardingPage() {
           {/* STEP 1: Founder Details */}
           {step === 1 && (
             <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-              <h2 className="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">1. Founder Profile</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-4">1. Founder Profile</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
                   <input required name="fullName" value={formData.fullName} onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Mobile Number *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Mobile Number *</label>
                   <input required name="mobile" value={formData.mobile} onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Email Address *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Email Address *</label>
                   <input required type="email" name="email" value={formData.email} onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Create Password *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Create Password *</label>
                   <input required type="password" name="password" value={formData.password} onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
               </div>
             </div>
@@ -165,32 +165,32 @@ export default function OnboardingPage() {
           {/* STEP 2: Startup Overview */}
           {step === 2 && (
             <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-              <h2 className="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">2. Startup Overview</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-4">2. Startup Overview</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Startup Name *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Startup Name *</label>
                   <input required name="orgName" value={formData.orgName} onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Website (Optional)</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Website (Optional)</label>
                   <input name="website" value={formData.website} onChange={handleChange} placeholder="https://"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">One-Liner Pitch *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">One-Liner Pitch *</label>
                   <input required name="description" value={formData.description} onChange={handleChange} placeholder="What does your startup do in one sentence?"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Problem Statement *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Problem Statement *</label>
                   <textarea required name="problemStatement" value={formData.problemStatement} onChange={handleChange} rows={3}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Proposed Solution *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Proposed Solution *</label>
                   <textarea required name="solution" value={formData.solution} onChange={handleChange} rows={3}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all" />
                 </div>
               </div>
             </div>
@@ -199,14 +199,14 @@ export default function OnboardingPage() {
           {/* STEP 3: Venture Stage & Domain */}
           {step === 3 && (
             <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-              <h2 className="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">3. Venture Stage &amp; Domain</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-4">3. Venture Stage &amp; Domain</h2>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">
                   Current Venture Stage (Self-Declared) *
                 </label>
                 <select required name="stage" value={formData.stage} onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
+                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
                   {VENTURE_STAGES.map(s => (
                     <option key={s} className="bg-slate-900" value={s}>{s}</option>
                   ))}
@@ -228,7 +228,7 @@ export default function OnboardingPage() {
                           className={`text-xs border px-3 py-1 rounded-full font-medium ${
                             item.required
                               ? "bg-yellow-500/10 border-yellow-500/30 text-yellow-300"
-                              : "bg-white/5 border-white/10 text-slate-400"
+                              : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400"
                           }`}
                         >
                           {item.label} {item.required && "*"}
@@ -240,15 +240,15 @@ export default function OnboardingPage() {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Primary Domain *</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Primary Domain *</label>
                 <select required name="primaryDomain" value={formData.primaryDomain} onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
+                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer">
                   {ALL_DOMAINS.map(d => <option key={`p-${d}`} className="bg-slate-900" value={d}>{d}</option>)}
                 </select>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Secondary Domains</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 block">Secondary Domains</label>
                 <div className="flex flex-wrap gap-3">
                   {ALL_DOMAINS.map(domain => {
                     if (domain === formData.primaryDomain) return null;
@@ -256,7 +256,7 @@ export default function OnboardingPage() {
                     return (
                       <div key={`s-${domain}`} onClick={() => handleDomainToggle(domain)}
                         className={`px-4 py-2 rounded-xl border text-sm font-medium cursor-pointer transition-all ${
-                          isSelected ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-300" : "bg-white/5 border-white/10 text-slate-400 hover:bg-white/10"
+                          isSelected ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-300" : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:bg-white/60 dark:bg-white/10"
                         }`}>
                         {domain}
                       </div>
@@ -270,29 +270,29 @@ export default function OnboardingPage() {
           {/* STEP 4: Evidence & Supporting Documents */}
           {step === 4 && (
             <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-              <h2 className="text-xl font-bold text-white mb-2 border-b border-white/10 pb-4">4. Evidence &amp; Supporting Documents</h2>
-              <p className="text-sm text-slate-400 -mt-2">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 border-b border-slate-200 dark:border-white/10 pb-4">4. Evidence &amp; Supporting Documents</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400 -mt-2">
                 Upload supporting evidence for your claimed <span className="text-[#FFD700] font-bold">{formData.stage}</span> stage.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* Pitch Deck Upload */}
-                <div className="bg-white/5 border border-white/10 border-dashed rounded-2xl p-6 text-center hover:bg-white/10 transition-all cursor-pointer relative group">
+                <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 border-dashed rounded-2xl p-6 text-center hover:bg-white/60 dark:bg-white/10 transition-all cursor-pointer relative group">
                   <input type="file" accept=".pdf,.ppt,.pptx" onChange={(e) => setPitchDeck(e.target.files?.[0] || null)}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                  <FileText className={`w-10 h-10 mx-auto mb-3 ${pitchDeck ? 'text-[#FFD700]' : 'text-slate-500 group-hover:text-slate-400'}`} />
-                  <h3 className="text-white font-bold mb-1">{pitchDeck ? pitchDeck.name : "Upload Pitch Deck"}</h3>
+                  <FileText className={`w-10 h-10 mx-auto mb-3 ${pitchDeck ? 'text-[#FFD700]' : 'text-slate-500 group-hover:text-slate-500 dark:text-slate-400'}`} />
+                  <h3 className="text-slate-900 dark:text-white font-bold mb-1">{pitchDeck ? pitchDeck.name : "Upload Pitch Deck"}</h3>
                   <p className="text-xs text-slate-500">PDF, PPTX up to 10MB</p>
                   {pitchDeck && <div className="mt-3 text-xs bg-green-500/10 text-green-400 py-1 px-3 rounded-full inline-block">Ready to upload</div>}
                 </div>
 
                 {/* Incorporation Upload */}
-                <div className="bg-white/5 border border-white/10 border-dashed rounded-2xl p-6 text-center hover:bg-white/10 transition-all cursor-pointer relative group">
+                <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 border-dashed rounded-2xl p-6 text-center hover:bg-white/60 dark:bg-white/10 transition-all cursor-pointer relative group">
                   <input type="file" accept=".pdf,.jpeg,.jpg,.png" onChange={(e) => setIncorpDoc(e.target.files?.[0] || null)}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                  <Upload className={`w-10 h-10 mx-auto mb-3 ${incorpDoc ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-400'}`} />
-                  <h3 className="text-white font-bold mb-1">{incorpDoc ? incorpDoc.name : "Incorporation Certificate"}</h3>
+                  <Upload className={`w-10 h-10 mx-auto mb-3 ${incorpDoc ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-500 dark:text-slate-400'}`} />
+                  <h3 className="text-slate-900 dark:text-white font-bold mb-1">{incorpDoc ? incorpDoc.name : "Incorporation Certificate"}</h3>
                   <p className="text-xs text-slate-500">Optional. PDF, JPG</p>
                   {incorpDoc && <div className="mt-3 text-xs bg-green-500/10 text-green-400 py-1 px-3 rounded-full inline-block">Ready to upload</div>}
                 </div>
@@ -301,32 +301,32 @@ export default function OnboardingPage() {
 
               {/* Product/MVP URL */}
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Product/MVP URL (if applicable)</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Product/MVP URL (if applicable)</label>
                 <input
                   name="evidenceUrl"
                   value={formData.evidenceUrl}
                   onChange={handleChange}
                   placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all"
                 />
               </div>
 
               {/* Progress Notes */}
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Progress Notes</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Progress Notes</label>
                 <textarea
                   name="evidenceNote"
                   value={formData.evidenceNote}
                   onChange={handleChange}
                   rows={3}
                   placeholder="Describe your current progress, what you have built, and any key achievements..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                  className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all"
                 />
               </div>
 
               <div className="bg-[#FFD700]/10 border border-[#FFD700]/20 p-4 rounded-xl flex items-start gap-4 mt-2">
                 <ShieldCheck className="w-6 h-6 text-[#FFD700] flex-shrink-0" />
-                <p className="text-sm text-slate-300">
+                <p className="text-sm text-slate-600 dark:text-slate-300">
                   By submitting this application, you agree to the Terms of Service. Your startup will enter a verification phase and a Manager will review your details before assigning a Mentor.
                 </p>
               </div>
@@ -335,10 +335,10 @@ export default function OnboardingPage() {
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between mt-10 pt-6 border-t border-white/10">
+          <div className="flex items-center justify-between mt-10 pt-6 border-t border-slate-200 dark:border-white/10">
             <button type="button" onClick={prevStep} disabled={step === 1 || loading}
               className={`px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 transition-all ${
-                step === 1 ? "opacity-0 pointer-events-none" : "bg-white/5 text-slate-300 hover:bg-white/10"
+                step === 1 ? "opacity-0 pointer-events-none" : "bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:bg-white/10"
               }`}>
               <ChevronLeft className="w-4 h-4" /> Back
             </button>

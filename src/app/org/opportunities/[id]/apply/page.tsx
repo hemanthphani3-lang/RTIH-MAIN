@@ -46,28 +46,28 @@ export default function OrgOpportunityApplyPage() {
     }
   };
 
-  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading...</div></DashboardLayout>;
-  if (!opportunity) return <div className="p-8 text-center text-white">Opportunity not found.</div>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-slate-900 dark:text-white">Loading...</div></DashboardLayout>;
+  if (!opportunity) return <div className="p-8 text-center text-slate-900 dark:text-white">Opportunity not found.</div>;
 
   return (
     <DashboardLayout>
       <div className="p-8 max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
         
-        <Link href={`/org/opportunities/${id}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+        <Link href={`/org/opportunities/${id}`} className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Opportunity
         </Link>
 
         {/* Header */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl text-center">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-8 rounded-3xl text-center">
           <div className="w-16 h-16 bg-indigo-500/20 border border-indigo-500/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Rocket className="w-8 h-8 text-indigo-400" />
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mb-2">Apply for {opportunity.title}</h1>
-          <p className="text-slate-400 text-sm">Tell us why your startup is the perfect fit for this opportunity.</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">Apply for {opportunity.title}</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">Tell us why your startup is the perfect fit for this opportunity.</p>
         </div>
 
         {/* Application Form */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             
             <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex items-start gap-3">
@@ -78,19 +78,19 @@ export default function OrgOpportunityApplyPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-slate-300 mb-2">Value Proposition / Pitch</label>
+              <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Value Proposition / Pitch</label>
               <p className="text-xs text-slate-500 mb-3">Explain how your solution aligns with the goals of this {opportunity.type.toLowerCase()}.</p>
               <textarea 
                 required 
                 rows={6}
                 value={pitch}
                 onChange={e => setPitch(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:border-indigo-500 transition-colors"
+                className="w-full bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-600 focus:border-indigo-500 transition-colors"
                 placeholder="Our startup is a great fit because..."
               />
             </div>
 
-            <div className="pt-6 border-t border-white/10">
+            <div className="pt-6 border-t border-slate-200 dark:border-white/10">
               <button 
                 type="submit" 
                 disabled={submitting}

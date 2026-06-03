@@ -146,7 +146,7 @@ export default function OrgOpportunityWorkspacePage() {
 
   if (!workspace) return (
     <DashboardLayout>
-      <div className="p-8 text-center text-white">Workspace not active or not found.</div>
+      <div className="p-8 text-center text-slate-900 dark:text-white">Workspace not active or not found.</div>
     </DashboardLayout>
   );
 
@@ -156,7 +156,7 @@ export default function OrgOpportunityWorkspacePage() {
     <DashboardLayout>
       <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
 
-        <Link href="/org/applications" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+        <Link href="/org/applications" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Applications
         </Link>
 
@@ -167,12 +167,12 @@ export default function OrgOpportunityWorkspacePage() {
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               <span className="text-xs font-bold text-green-400 uppercase tracking-widest">Active Workspace</span>
             </div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">{opportunity?.title}</h1>
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{opportunity?.title}</h1>
             <p className="text-indigo-200 mt-1 text-sm">You are officially accepted. Manage your participation here.</p>
           </div>
           {opportunity?.event_date && (
-            <div className="bg-black/20 border border-white/10 px-6 py-4 rounded-2xl shrink-0">
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Event Date</p>
+            <div className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 px-6 py-4 rounded-2xl shrink-0">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest mb-1">Event Date</p>
               <p className="text-xl font-bold text-[#FFD700]">{new Date(opportunity.event_date).toLocaleDateString()}</p>
             </div>
           )}
@@ -186,15 +186,15 @@ export default function OrgOpportunityWorkspacePage() {
             {opportunity?.type === "Hackathon" ? (
               <>
                 {/* ── TEAM MANAGEMENT ── */}
-                <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-                  <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                     <Users className="w-5 h-5 text-indigo-400" /> Team Management
                   </h2>
 
                   {!team ? (
                     // Register Team Form
                     <div className="space-y-3">
-                      <p className="text-slate-400 text-sm mb-4">You haven't registered a team yet. Create one to start participating.</p>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4">You haven't registered a team yet. Create one to start participating.</p>
                       <div className="flex gap-3">
                         <input
                           type="text"
@@ -202,12 +202,12 @@ export default function OrgOpportunityWorkspacePage() {
                           value={teamName}
                           onChange={e => { setTeamName(e.target.value); setTeamError(""); }}
                           onKeyDown={e => e.key === "Enter" && handleCreateTeam()}
-                          className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                          className="flex-1 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                         />
                         <button
                           onClick={handleCreateTeam}
                           disabled={creatingTeam || !teamName.trim()}
-                          className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 rounded-xl font-bold transition-all flex items-center gap-2 whitespace-nowrap"
+                          className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 dark:text-white px-6 rounded-xl font-bold transition-all flex items-center gap-2 whitespace-nowrap"
                         >
                           {creatingTeam ? <><Loader2 className="w-4 h-4 animate-spin" /> Registering...</> : "Register Team"}
                         </button>
@@ -223,8 +223,8 @@ export default function OrgOpportunityWorkspacePage() {
                     <div className="space-y-6">
                       <div className="flex items-center justify-between bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-5">
                         <div>
-                          <p className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Team Name</p>
-                          <p className="text-2xl font-extrabold text-white">{team.name}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1">Team Name</p>
+                          <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{team.name}</p>
                         </div>
                         <span className="bg-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-xs font-bold border border-green-500/30 uppercase">
                           {team.status}
@@ -233,7 +233,7 @@ export default function OrgOpportunityWorkspacePage() {
 
                       {/* Members list */}
                       <div>
-                        <p className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-3">
+                        <p className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest mb-3">
                           Team Members ({team.hackathon_team_members?.length || 0})
                         </p>
                         <div className="space-y-2 mb-4">
@@ -241,12 +241,12 @@ export default function OrgOpportunityWorkspacePage() {
                             <p className="text-slate-500 text-sm italic">No members added yet.</p>
                           ) : (
                             team.hackathon_team_members?.map((m: any) => (
-                              <div key={m.id} className="flex justify-between items-center bg-black/40 p-3.5 rounded-xl border border-white/5">
+                              <div key={m.id} className="flex justify-between items-center bg-slate-200 dark:bg-black/40 p-3.5 rounded-xl border border-white/5">
                                 <div>
-                                  <p className="font-bold text-white text-sm">{m.member_name}</p>
-                                  <p className="text-xs text-slate-400">{m.member_email}</p>
+                                  <p className="font-bold text-slate-900 dark:text-white text-sm">{m.member_name}</p>
+                                  <p className="text-xs text-slate-500 dark:text-slate-400">{m.member_email}</p>
                                 </div>
-                                <span className={`text-xs px-2 py-1 rounded font-bold ${m.role === "Leader" ? "bg-[#FFD700]/10 text-[#FFD700]" : "bg-white/10 text-slate-300"}`}>
+                                <span className={`text-xs px-2 py-1 rounded font-bold ${m.role === "Leader" ? "bg-[#FFD700]/10 text-[#FFD700]" : "bg-white/60 dark:bg-white/10 text-slate-600 dark:text-slate-300"}`}>
                                   {m.role}
                                 </span>
                               </div>
@@ -261,21 +261,21 @@ export default function OrgOpportunityWorkspacePage() {
                             placeholder="Member name"
                             value={newMember.name}
                             onChange={e => setNewMember(p => ({ ...p, name: e.target.value }))}
-                            className="w-2/5 bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                            className="w-2/5 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
                           />
                           <input
                             type="email"
                             placeholder="Member email"
                             value={newMember.email}
                             onChange={e => setNewMember(p => ({ ...p, email: e.target.value }))}
-                            className="flex-1 bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                            className="flex-1 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
                           />
                           <button
                             onClick={handleAddMember}
                             disabled={addingMember || !newMember.name.trim() || !newMember.email.trim()}
-                            className="bg-white/10 hover:bg-white/20 disabled:opacity-50 px-4 rounded-xl flex items-center justify-center border border-white/10 transition-all"
+                            className="bg-white/60 dark:bg-white/10 hover:bg-white/20 disabled:opacity-50 px-4 rounded-xl flex items-center justify-center border border-slate-200 dark:border-white/10 transition-all"
                           >
-                            {addingMember ? <Loader2 className="w-5 h-5 text-white animate-spin" /> : <PlusCircle className="w-5 h-5 text-white" />}
+                            {addingMember ? <Loader2 className="w-5 h-5 text-slate-900 dark:text-white animate-spin" /> : <PlusCircle className="w-5 h-5 text-slate-900 dark:text-white" />}
                           </button>
                         </div>
                       </div>
@@ -285,9 +285,9 @@ export default function OrgOpportunityWorkspacePage() {
 
                 {/* ── SUBMISSION PORTAL ── */}
                 {team && (
-                  <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
+                  <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                      <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <Send className="w-5 h-5 text-green-400" /> Submission Portal
                       </h2>
                       {existingSubmission && (
@@ -311,11 +311,11 @@ export default function OrgOpportunityWorkspacePage() {
                     <div className="space-y-4">
                       {/* Challenge Track */}
                       <div>
-                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 block">Challenge Track *</label>
+                        <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 block">Challenge Track *</label>
                         <select
                           value={submission.psId}
                           onChange={e => setSubmission(p => ({ ...p, psId: e.target.value }))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500"
+                          className="w-full bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-green-500"
                         >
                           <option value="">Select challenge track...</option>
                           {problemStatements.map(ps => <option key={ps.id} value={ps.id}>{ps.title}</option>)}
@@ -327,53 +327,53 @@ export default function OrgOpportunityWorkspacePage() {
 
                       {/* Project Title */}
                       <div>
-                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 block">Project Title *</label>
+                        <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 block">Project Title *</label>
                         <input
                           type="text"
                           placeholder="e.g. EcoTrack — Carbon Footprint Analyzer"
                           value={submission.title}
                           onChange={e => setSubmission(p => ({ ...p, title: e.target.value }))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500"
+                          className="w-full bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-green-500"
                         />
                       </div>
 
                       {/* Description */}
                       <div>
-                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 block">Description</label>
+                        <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5 block">Description</label>
                         <textarea
                           placeholder="Briefly describe your solution, approach, and impact..."
                           rows={3}
                           value={submission.desc}
                           onChange={e => setSubmission(p => ({ ...p, desc: e.target.value }))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-green-500"
+                          className="w-full bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-green-500"
                         />
                       </div>
 
                       {/* Links grid */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div className="flex items-center gap-3 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
-                          <GitBranch className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div className="flex items-center gap-3 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
+                          <GitBranch className="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" />
                           <input type="url" placeholder="GitHub Repository URL" value={submission.github}
                             onChange={e => setSubmission(p => ({ ...p, github: e.target.value }))}
-                            className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-slate-500" />
+                            className="flex-1 bg-transparent text-slate-900 dark:text-white text-sm focus:outline-none placeholder-slate-500" />
                         </div>
-                        <div className="flex items-center gap-3 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
-                          <Link2 className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div className="flex items-center gap-3 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
+                          <Link2 className="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" />
                           <input type="url" placeholder="Live Demo URL" value={submission.demo}
                             onChange={e => setSubmission(p => ({ ...p, demo: e.target.value }))}
-                            className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-slate-500" />
+                            className="flex-1 bg-transparent text-slate-900 dark:text-white text-sm focus:outline-none placeholder-slate-500" />
                         </div>
-                        <div className="flex items-center gap-3 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
-                          <PlayCircle className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div className="flex items-center gap-3 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
+                          <PlayCircle className="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" />
                           <input type="url" placeholder="Demo Video URL (YouTube/Drive)" value={submission.video}
                             onChange={e => setSubmission(p => ({ ...p, video: e.target.value }))}
-                            className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-slate-500" />
+                            className="flex-1 bg-transparent text-slate-900 dark:text-white text-sm focus:outline-none placeholder-slate-500" />
                         </div>
-                        <div className="flex items-center gap-3 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
-                          <FileText className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div className="flex items-center gap-3 bg-slate-200 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 focus-within:border-green-500 transition-all">
+                          <FileText className="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" />
                           <input type="url" placeholder="Pitch Deck URL (Slides/Drive)" value={submission.pitchDeck}
                             onChange={e => setSubmission(p => ({ ...p, pitchDeck: e.target.value }))}
-                            className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder-slate-500" />
+                            className="flex-1 bg-transparent text-slate-900 dark:text-white text-sm focus:outline-none placeholder-slate-500" />
                         </div>
                       </div>
 
@@ -400,12 +400,12 @@ export default function OrgOpportunityWorkspacePage() {
                 )}
               </>
             ) : (
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 text-center space-y-4">
+              <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8 text-center space-y-4">
                 <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center mx-auto">
                   <FileText className="w-8 h-8 text-blue-400" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Opportunity Workspace</h3>
-                <p className="text-slate-400 text-sm max-w-md mx-auto">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Opportunity Workspace</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">
                   This workspace is active. Contact your manager for next steps or deliverable instructions.
                 </p>
               </div>
@@ -414,8 +414,8 @@ export default function OrgOpportunityWorkspacePage() {
 
           {/* Timeline Sidebar */}
           <div className="space-y-6">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
-              <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Activity Timeline</h2>
+            <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-6">
+              <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">Activity Timeline</h2>
               {timeline.length === 0 ? (
                 <p className="text-slate-500 text-sm italic">No activity yet.</p>
               ) : (
@@ -423,14 +423,14 @@ export default function OrgOpportunityWorkspacePage() {
                   {timeline.map((event, i) => (
                     <div key={event.id} className="relative flex gap-4">
                       {i !== timeline.length - 1 && (
-                        <div className="absolute left-4 top-8 bottom-[-24px] w-px bg-white/10" />
+                        <div className="absolute left-4 top-8 bottom-[-24px] w-px bg-white/60 dark:bg-white/10" />
                       )}
                       <div className="relative z-10 w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
                         <Activity className="w-4 h-4 text-indigo-400" />
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-white">{event.event}</p>
-                        {event.description && <p className="text-xs text-slate-400 mt-0.5">{event.description}</p>}
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">{event.event}</p>
+                        {event.description && <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{event.description}</p>}
                         <p className="text-[10px] text-slate-500 mt-1">{new Date(event.timestamp).toLocaleString()}</p>
                       </div>
                     </div>

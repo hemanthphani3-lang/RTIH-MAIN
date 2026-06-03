@@ -156,13 +156,13 @@ export default function MentorStartupDetail() {
                                 rows={3}
                               />
                               <div className="flex gap-2">
-                                <button onClick={() => handleReview(sub.id, 'Approved')} className="bg-green-600 text-white px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-1.5 hover:bg-green-700 shadow-sm transition-all"><CheckCircle className="w-4 h-4"/> Approve Milestone</button>
-                                <button onClick={() => handleReview(sub.id, 'Rejected')} className="bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-1.5 hover:bg-red-700 shadow-sm transition-all"><XCircle className="w-4 h-4"/> Reject & Request Revisions</button>
+                                <button onClick={() => handleReview(sub.id, 'Approved')} className="bg-green-600 text-slate-900 dark:text-white px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-1.5 hover:bg-green-700 shadow-sm transition-all"><CheckCircle className="w-4 h-4"/> Approve Milestone</button>
+                                <button onClick={() => handleReview(sub.id, 'Rejected')} className="bg-red-600 text-slate-900 dark:text-white px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-1.5 hover:bg-red-700 shadow-sm transition-all"><XCircle className="w-4 h-4"/> Reject & Request Revisions</button>
                                 <button onClick={() => setActiveReviewId(null)} className="text-gray-500 text-sm ml-2 hover:text-gray-700 font-medium px-2">Cancel</button>
                               </div>
                             </div>
                           ) : (
-                            <button onClick={() => setActiveReviewId(sub.id)} className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 shadow-sm transition-all shadow-blue-600/20">Review Submission</button>
+                            <button onClick={() => setActiveReviewId(sub.id)} className="bg-blue-600 text-slate-900 dark:text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 shadow-sm transition-all shadow-blue-600/20">Review Submission</button>
                           )}
                         </div>
                       )}
@@ -184,7 +184,7 @@ export default function MentorStartupDetail() {
               <form onSubmit={handleCreateTask} className="mb-6 space-y-3 bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-inner">
                 <input required value={newTaskTitle} onChange={e => setNewTaskTitle(e.target.value)} placeholder="New Task Title" className="w-full text-sm p-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                 <textarea value={newTaskDesc} onChange={e => setNewTaskDesc(e.target.value)} placeholder="Task Description (Optional)" className="w-full text-sm p-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all" rows={2} />
-                <button type="submit" className="w-full bg-gray-900 text-white px-4 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors shadow-sm"><Plus className="w-4 h-4"/> Assign Task to Startup</button>
+                <button type="submit" className="w-full bg-gray-900 text-slate-900 dark:text-white px-4 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors shadow-sm"><Plus className="w-4 h-4"/> Assign Task to Startup</button>
               </form>
 
               <div className="space-y-3">
@@ -194,7 +194,7 @@ export default function MentorStartupDetail() {
                       {ai.status === 'Completed' ? <CheckCircle className="w-5 h-5 text-green-500" /> : <Clock className="w-5 h-5 text-orange-400" />}
                     </div>
                     <div>
-                      <h4 className={`text-sm font-bold ${ai.status === 'Completed' ? 'text-gray-400 line-through' : 'text-gray-900'}`}>{ai.title}</h4>
+                      <h4 className={`text-sm font-bold ${ai.status === 'Completed' ? 'text-slate-500 dark:text-gray-400 line-through' : 'text-gray-900'}`}>{ai.title}</h4>
                       {ai.description && <p className="text-xs text-gray-500 mt-1">{ai.description}</p>}
                     </div>
                   </div>

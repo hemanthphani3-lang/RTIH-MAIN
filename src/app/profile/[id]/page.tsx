@@ -119,8 +119,8 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
     return isSender ? conn.receiver : conn.sender;
   };
 
-  if (loading) return <DashboardLayout><div className="p-8 text-white text-center">Loading profile...</div></DashboardLayout>;
-  if (!data) return <DashboardLayout><div className="p-8 text-white text-center">Profile not found.</div></DashboardLayout>;
+  if (loading) return <DashboardLayout><div className="p-8 text-slate-900 dark:text-white text-center">Loading profile...</div></DashboardLayout>;
+  if (!data) return <DashboardLayout><div className="p-8 text-slate-900 dark:text-white text-center">Profile not found.</div></DashboardLayout>;
 
   const { profile, role, org, mentor, manager } = data;
 
@@ -154,7 +154,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
     if (isSelf) return null;
     if (!connStatus) return (
       <button onClick={handleConnect} disabled={connecting}
-        className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+        className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-slate-900 dark:text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
         <UserPlus className="w-4 h-4" /> {connecting ? "Sending..." : "Connect"}
       </button>
     );
@@ -165,7 +165,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
     );
     if (connStatus.status === "Accepted") return (
       <Link href={`/messages?with=${resolvedId}`}
-        className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+        className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-slate-900 dark:text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
         <MessageSquare className="w-4 h-4" /> Send Message
       </Link>
     );
@@ -177,20 +177,20 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
       <div className="p-8 max-w-4xl mx-auto space-y-6 pb-20 animate-in fade-in duration-500">
 
         {!isSelf && (
-          <Link href="/network" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
+          <Link href="/network" className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors text-sm">
             <ArrowLeft className="w-4 h-4" /> Back to Network
           </Link>
         )}
 
         {/* Profile Hero */}
         <div className={`bg-gradient-to-r ${getRoleBg()} border rounded-3xl p-8 flex flex-col md:flex-row items-start md:items-center gap-6`}>
-          <div className="w-20 h-20 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl font-extrabold text-white shrink-0 shadow-lg">
+          <div className="w-20 h-20 bg-white/60 dark:bg-white/10 border border-slate-300 dark:border-white/20 rounded-2xl flex items-center justify-center text-3xl font-extrabold text-slate-900 dark:text-white shrink-0 shadow-lg">
             {profile.full_name?.[0]}
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
               {getRoleIcon()}
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{role}</span>
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">{role}</span>
               {isSelf && <span className="text-[10px] bg-[#FFD700]/10 text-[#FFD700] border border-[#FFD700]/20 px-2 py-0.5 rounded font-bold">You</span>}
             </div>
             {isEditing ? (
@@ -198,7 +198,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                 <input
                   type="text"
                   placeholder="Full Name"
-                  className="bg-black/20 border border-white/10 rounded-lg px-3 py-1.5 text-white font-bold w-full max-w-sm focus:border-indigo-500 focus:outline-none"
+                  className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-slate-900 dark:text-white font-bold w-full max-w-sm focus:border-indigo-500 focus:outline-none"
                   value={editForm.full_name}
                   onChange={e => setEditForm({ ...editForm, full_name: e.target.value })}
                 />
@@ -206,7 +206,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   <input
                     type="text"
                     placeholder="Startup Name"
-                    className="bg-black/20 border border-white/10 rounded-lg px-3 py-1.5 text-white font-bold text-xl w-full max-w-sm focus:border-indigo-500 focus:outline-none"
+                    className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-slate-900 dark:text-white font-bold text-xl w-full max-w-sm focus:border-indigo-500 focus:outline-none"
                     value={editForm.org_name}
                     onChange={e => setEditForm({ ...editForm, org_name: e.target.value })}
                   />
@@ -214,27 +214,27 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
               </div>
             ) : (
               <>
-                <h1 className="text-3xl font-extrabold text-white tracking-tight">
+                <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   {role === "Organization" ? org?.name : profile.full_name}
                 </h1>
-                {role === "Organization" && <p className="text-slate-400 text-sm mt-1">Founder: {profile.full_name}</p>}
+                {role === "Organization" && <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Founder: {profile.full_name}</p>}
               </>
             )}
           </div>
           <div className="shrink-0 flex flex-wrap gap-3 mt-4 md:mt-0">
             {isSelf ? (
               isEditing ? (
-                <button onClick={handleSaveProfile} disabled={isSaving} className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">
+                <button onClick={handleSaveProfile} disabled={isSaving} className="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-slate-900 dark:text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">
                   <Save className="w-4 h-4" /> {isSaving ? "Saving..." : "Save Changes"}
                 </button>
               ) : (
-                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all">
+                <button onClick={() => setIsEditing(true)} className="flex items-center gap-2 bg-white/60 dark:bg-white/10 hover:bg-white/20 text-slate-900 dark:text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all">
                   <Pencil className="w-4 h-4" /> Edit Profile
                 </button>
               )
             ) : null}
             {isSelf && !isEditing && (
-              <Link href="/network" className="flex items-center gap-2 border border-white/10 hover:bg-white/10 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all">
+              <Link href="/network" className="flex items-center gap-2 border border-slate-200 dark:border-white/10 hover:bg-white/60 dark:bg-white/10 text-slate-900 dark:text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all">
                 <Network className="w-4 h-4" /> Discover Network
               </Link>
             )}
@@ -247,23 +247,23 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <ShieldCheck className="w-6 h-6 text-[#FFD700] mx-auto mb-2" />
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Current Stage</p>
-              <p className="text-lg font-extrabold text-white">{org.verified_stage || org.stage}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Current Stage</p>
+              <p className="text-lg font-extrabold text-slate-900 dark:text-white">{org.verified_stage || org.stage}</p>
             </div>
             <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Activity className="w-6 h-6 text-pink-400 mx-auto mb-2" />
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Health Score</p>
-              <p className="text-lg font-extrabold text-white">{org.health_score ?? "N/A"}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Health Score</p>
+              <p className="text-lg font-extrabold text-slate-900 dark:text-white">{org.health_score ?? "N/A"}</p>
             </div>
             <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Award className="w-6 h-6 text-purple-400 mx-auto mb-2" />
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Badges Earned</p>
-              <p className="text-lg font-extrabold text-white">{earnedBadges.length}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Badges Earned</p>
+              <p className="text-lg font-extrabold text-slate-900 dark:text-white">{earnedBadges.length}</p>
             </div>
             <div className="bg-[#1e293b] border border-slate-700/50 rounded-2xl p-5 text-center shadow-lg">
               <Target className="w-6 h-6 text-green-400 mx-auto mb-2" />
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Milestones</p>
-              <p className="text-lg font-extrabold text-white">{(org as any)?.completed_milestones || (earnedBadges.length * 8)}+</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Milestones</p>
+              <p className="text-lg font-extrabold text-slate-900 dark:text-white">{(org as any)?.completed_milestones || (earnedBadges.length * 8)}+</p>
             </div>
           </div>
         )}
@@ -274,20 +274,20 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
             {[
               { label: "Connections", value: accepted.length, color: "text-indigo-400", bg: "bg-indigo-500/5", border: "border-indigo-500/10" },
               { label: "Pending Requests", value: pending.length, color: "text-yellow-400", bg: "bg-yellow-500/5", border: "border-yellow-500/10" },
-              { label: "Sent", value: sent.length, color: "text-slate-400", bg: "bg-white/5", border: "border-white/10" },
+              { label: "Sent", value: sent.length, color: "text-slate-500 dark:text-slate-400", bg: "bg-white dark:bg-white/5", border: "border-slate-200 dark:border-white/10" },
             ].map(({ label, value, color, bg, border }) => (
               <div key={label} className={`${bg} border ${border} rounded-2xl p-5 text-center shadow-sm`}>
                 <p className={`text-3xl font-extrabold ${color}`}>{value}</p>
-                <p className="text-xs text-slate-400 mt-1 font-bold">{label}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-bold">{label}</p>
               </div>
             ))}
           </div>
         ) : (
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center justify-center gap-4">
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 flex items-center justify-center gap-4">
             <Users className="w-6 h-6 text-indigo-400" />
             <div className="text-left">
-              <p className="text-2xl font-extrabold text-white">{publicConnectionCount}</p>
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Connections</p>
+              <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{publicConnectionCount}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Connections</p>
             </div>
           </div>
         )}
@@ -295,42 +295,42 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         {/* Founder Achievements */}
         {role === "Organization" && org && (
           <div className="bg-gradient-to-br from-[#0f172a] to-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl">
-            <h2 className="text-xl font-extrabold text-white mb-6 flex items-center gap-3">
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
               <Sparkles className="w-6 h-6 text-[#FFD700]" /> Founder Achievements
             </h2>
             
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Stage Badges</h3>
+                <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4">Stage Badges</h3>
                 {earnedBadges.length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {earnedBadges.map((b, i) => (
-                      <div key={i} className={`bg-white/5 border border-white/10 rounded-2xl p-4 text-center transition-all hover:-translate-y-1 hover:shadow-lg shadow-${b.color}-500/20`}>
+                      <div key={i} className={`bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 text-center transition-all hover:-translate-y-1 hover:shadow-lg shadow-${b.color}-500/20`}>
                         <div className="text-4xl mb-2 filter drop-shadow-md">{b.icon}</div>
-                        <p className="font-extrabold text-white text-sm">{b.name}</p>
-                        <p className="text-xs text-slate-400 mt-1">{b.stage} Complete</p>
+                        <p className="font-extrabold text-slate-900 dark:text-white text-sm">{b.name}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{b.stage} Complete</p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-black/20 border border-white/5 rounded-2xl p-8 text-center">
+                  <div className="bg-slate-100 dark:bg-black/20 border border-white/5 rounded-2xl p-8 text-center">
                     <Target className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-                    <p className="text-slate-400 text-sm font-bold">Complete your first stage to earn a badge!</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm font-bold">Complete your first stage to earn a badge!</p>
                   </div>
                 )}
               </div>
 
               {org.certificates?.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Ecosystem Certifications</h3>
+                  <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4">Ecosystem Certifications</h3>
                   <div className="space-y-2">
                     {org.certificates.map((cert: any, i: number) => (
                       <div key={i} className="flex items-center justify-between bg-black/30 border border-white/5 rounded-xl px-5 py-4">
                         <div className="flex items-center gap-3">
                           <Award className="w-5 h-5 text-indigo-400" />
-                          <p className="text-sm font-bold text-white">{cert.certificate_type}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white">{cert.certificate_type}</p>
                         </div>
-                        <p className="text-xs text-slate-400 flex items-center gap-1 bg-white/5 px-2 py-1 rounded-md font-bold">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 bg-white dark:bg-white/5 px-2 py-1 rounded-md font-bold">
                           <Calendar className="w-3 h-3" /> {new Date(cert.issue_date).toLocaleDateString()}
                         </p>
                       </div>
@@ -344,8 +344,8 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
         {/* Org Info */}
         {role === "Organization" && org && (
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-6">
-            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8 space-y-6">
+            <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2">
               <Building2 className="w-4 h-4" /> Startup Details
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -354,13 +354,13 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   <div className="space-y-4">
                     <div>
                       <p className="text-xs text-slate-500 mb-1 font-bold">Verified Stage</p>
-                      <input type="text" className="bg-black/20 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm w-full focus:border-indigo-500 focus:outline-none"
+                      <input type="text" className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-900 dark:text-white text-sm w-full focus:border-indigo-500 focus:outline-none"
                         value={editForm.stage} onChange={e => setEditForm({ ...editForm, stage: e.target.value })} disabled />
                       <p className="text-[10px] text-slate-500 mt-1">Stage can only be updated via milestones review.</p>
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 mb-1 font-bold">Website</p>
-                      <input type="text" className="bg-black/20 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm w-full focus:border-indigo-500 focus:outline-none"
+                      <input type="text" className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-900 dark:text-white text-sm w-full focus:border-indigo-500 focus:outline-none"
                         value={editForm.website} onChange={e => setEditForm({ ...editForm, website: e.target.value })} />
                     </div>
                   </div>
@@ -369,7 +369,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                     {org.stage && (
                       <div>
                         <p className="text-xs text-slate-500 font-bold mb-1">Declared Stage</p>
-                        <p className="text-white font-semibold">{org.stage}</p>
+                        <p className="text-slate-900 dark:text-white font-semibold">{org.stage}</p>
                       </div>
                     )}
                     {org.domains?.name && (
@@ -393,14 +393,14 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                 {isEditing ? (
                   <div>
                     <p className="text-xs text-slate-500 mb-1 font-bold">About the Venture</p>
-                    <textarea className="bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white text-sm w-full min-h-[120px] focus:border-indigo-500 focus:outline-none"
+                    <textarea className="bg-slate-100 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white text-sm w-full min-h-[120px] focus:border-indigo-500 focus:outline-none"
                       value={editForm.description} onChange={e => setEditForm({ ...editForm, description: e.target.value })} />
                   </div>
                 ) : (
                   org.description && (
                     <div>
                       <p className="text-xs text-slate-500 font-bold mb-2">About the Venture</p>
-                      <p className="text-slate-300 text-sm leading-relaxed">{org.description}</p>
+                      <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{org.description}</p>
                     </div>
                   )
                 )}
@@ -412,23 +412,23 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         {/* Mentor Info */}
         {role === "Mentor" && mentor && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-4">
-              <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Mentor Profile</h2>
+            <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8 space-y-4">
+              <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Mentor Profile</h2>
               <div className="space-y-4">
-                {mentor.bio && <div><p className="text-xs text-slate-500 font-bold mb-1">Bio</p><p className="text-slate-300 text-sm leading-relaxed">{mentor.bio}</p></div>}
-                {mentor.location && <div><p className="text-xs text-slate-500 font-bold mb-1">Hub Location</p><p className="text-white font-semibold flex items-center gap-1.5"><MapPin className="w-4 h-4 text-blue-400" />{mentor.location}</p></div>}
-                {mentor.experience_years && <div><p className="text-xs text-slate-500 font-bold mb-1">Experience</p><p className="text-white font-semibold">{mentor.experience_years} years</p></div>}
+                {mentor.bio && <div><p className="text-xs text-slate-500 font-bold mb-1">Bio</p><p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{mentor.bio}</p></div>}
+                {mentor.location && <div><p className="text-xs text-slate-500 font-bold mb-1">Hub Location</p><p className="text-slate-900 dark:text-white font-semibold flex items-center gap-1.5"><MapPin className="w-4 h-4 text-blue-400" />{mentor.location}</p></div>}
+                {mentor.experience_years && <div><p className="text-xs text-slate-500 font-bold mb-1">Experience</p><p className="text-slate-900 dark:text-white font-semibold">{mentor.experience_years} years</p></div>}
                 <div>
                   <p className="text-xs text-slate-500 font-bold mb-1">Availability</p>
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full border ${mentor.availability_status === "Available" ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-slate-500/10 text-slate-400 border-slate-500/20"}`}>
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full border ${mentor.availability_status === "Available" ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-slate-500/10 text-slate-500 dark:text-slate-400 border-slate-500/20"}`}>
                     {mentor.availability_status || "Not set"}
                   </span>
                 </div>
               </div>
             </div>
             {mentor.mentor_domains?.length > 0 && (
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-4">
-                <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2"><Sparkles className="w-4 h-4 text-green-400" /> Expertise Domains</h2>
+              <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8 space-y-4">
+                <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-2"><Sparkles className="w-4 h-4 text-green-400" /> Expertise Domains</h2>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {mentor.mentor_domains.map((md: any, i: number) => (
                     <span key={i} className="text-sm font-bold bg-green-500/10 text-green-400 border border-green-500/20 px-4 py-2 rounded-xl">{md.domains?.name}</span>
@@ -441,9 +441,9 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
         {/* Manager Info */}
         {role === "Manager" && manager && (
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-4">
-            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Manager Info</h2>
-            {manager.location && <div><p className="text-xs text-slate-500 font-bold mb-1">Hub Location</p><p className="text-white font-semibold flex items-center gap-1.5"><MapPin className="w-4 h-4 text-yellow-400" />{manager.location} Incubation Hub</p></div>}
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-8 space-y-4">
+            <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Manager Info</h2>
+            {manager.location && <div><p className="text-xs text-slate-500 font-bold mb-1">Hub Location</p><p className="text-slate-900 dark:text-white font-semibold flex items-center gap-1.5"><MapPin className="w-4 h-4 text-yellow-400" />{manager.location} Incubation Hub</p></div>}
           </div>
         )}
 
@@ -454,10 +454,10 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
             {/* Incoming Requests */}
             {pending.length > 0 && (
               <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-3xl overflow-hidden shadow-lg">
-                <div className="p-6 border-b border-white/10 flex items-center justify-between">
+                <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <UserPlus className="w-5 h-5 text-yellow-400" />
-                    <h2 className="font-extrabold text-white text-lg">Pending Requests</h2>
+                    <h2 className="font-extrabold text-slate-900 dark:text-white text-lg">Pending Requests</h2>
                   </div>
                   <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full">{pending.length} New</span>
                 </div>
@@ -465,18 +465,18 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   {pending.map(conn => {
                     const contact = getContact(conn);
                     return (
-                      <div key={conn.id} className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/5 transition-all">
+                      <div key={conn.id} className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white dark:bg-white/5 transition-all">
                         <div className="flex items-center gap-4">
                           <div className="w-14 h-14 bg-indigo-500/20 border border-indigo-500/30 rounded-2xl flex items-center justify-center font-bold text-indigo-400 text-2xl shrink-0 shadow-inner">
                             {(contact as any)?.full_name?.[0]}
                           </div>
                           <div>
-                            <p className="font-extrabold text-white text-lg">
+                            <p className="font-extrabold text-slate-900 dark:text-white text-lg">
                               {(contact as any)?.role === "Organization" && (contact as any)?.org_name 
                                 ? (contact as any)?.org_name 
                                 : (contact as any)?.full_name}
                             </p>
-                            <p className="text-sm text-slate-400 font-medium">
+                            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
                               {(contact as any)?.role === "Organization" && (contact as any)?.org_name 
                                 ? `Founder: ${(contact as any)?.full_name} • ${(contact as any)?.email}`
                                 : (contact as any)?.email}
@@ -504,25 +504,25 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
             )}
 
             {/* My Connections Grid */}
-            <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-lg">
-              <div className="p-6 border-b border-white/10 flex items-center justify-between">
+            <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-lg">
+              <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Users className="w-5 h-5 text-indigo-400" />
-                  <h2 className="font-extrabold text-white text-lg">My Network</h2>
+                  <h2 className="font-extrabold text-slate-900 dark:text-white text-lg">My Network</h2>
                 </div>
-                <span className="text-slate-400 text-sm font-bold">{accepted.length} Connections</span>
+                <span className="text-slate-500 dark:text-slate-400 text-sm font-bold">{accepted.length} Connections</span>
               </div>
               
               {accepted.length === 0 ? (
                 <div className="p-16 text-center">
                   <Network className="w-16 h-16 text-slate-700 mx-auto mb-4" />
-                  <p className="text-slate-400 font-bold mb-2 text-lg">Your network is empty</p>
+                  <p className="text-slate-500 dark:text-slate-400 font-bold mb-2 text-lg">Your network is empty</p>
                   <Link href="/network" className="text-indigo-400 hover:text-indigo-300 font-bold transition-colors inline-block bg-indigo-500/10 px-4 py-2 rounded-xl border border-indigo-500/20">
                     Browse the Ecosystem Network
                   </Link>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:gap-px bg-white/5">
+                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:gap-px bg-white dark:bg-white/5">
                   {accepted.map(conn => {
                     const contact = getContact(conn);
                     return (
@@ -532,17 +532,17 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                             {(contact as any)?.full_name?.[0]}
                           </div>
                           <div>
-                            <p className="font-extrabold text-white">{(contact as any)?.full_name}</p>
-                            <p className="text-xs text-slate-400 font-medium">{(contact as any)?.email}</p>
+                            <p className="font-extrabold text-slate-900 dark:text-white">{(contact as any)?.full_name}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{(contact as any)?.email}</p>
                           </div>
                         </div>
                         <div className="flex gap-2">
                           <Link href={`/profile/${(contact as any)?.id}`}
-                            className="text-xs text-slate-300 hover:text-white font-bold border border-slate-700 px-3 py-2 rounded-xl hover:bg-slate-700 transition-all shadow-sm">
+                            className="text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white font-bold border border-slate-700 px-3 py-2 rounded-xl hover:bg-slate-700 transition-all shadow-sm">
                             Profile
                           </Link>
                           <Link href={`/messages?with=${(contact as any)?.id}`}
-                            className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white w-9 h-9 rounded-xl transition-all shadow-md shadow-indigo-900/20">
+                            className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-slate-900 dark:text-white w-9 h-9 rounded-xl transition-all shadow-md shadow-indigo-900/20">
                             <MessageSquare className="w-4 h-4" />
                           </Link>
                         </div>
@@ -555,23 +555,23 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
             {/* Sent Requests */}
             {sent.length > 0 && (
-              <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
-                <div className="p-5 border-b border-white/10 flex items-center gap-3">
+              <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl overflow-hidden">
+                <div className="p-5 border-b border-slate-200 dark:border-white/10 flex items-center gap-3">
                   <UserPlus className="w-4 h-4 text-slate-500" />
-                  <h2 className="text-sm font-bold text-slate-300 uppercase tracking-widest">Sent Requests ({sent.length})</h2>
+                  <h2 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest">Sent Requests ({sent.length})</h2>
                 </div>
                 <div className="divide-y divide-white/5">
                   {sent.map(conn => {
                     const contact = getContact(conn);
                     return (
-                      <div key={conn.id} className="px-6 py-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+                      <div key={conn.id} className="px-6 py-4 flex items-center justify-between hover:bg-white dark:bg-white/5 transition-colors">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-center text-sm font-bold text-slate-400">
+                          <div className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-center text-sm font-bold text-slate-500 dark:text-slate-400">
                             {(contact as any)?.full_name?.[0]}
                           </div>
-                          <p className="text-sm font-bold text-white">{(contact as any)?.full_name}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white">{(contact as any)?.full_name}</p>
                         </div>
-                        <span className="text-[10px] font-bold text-slate-400 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full uppercase tracking-widest">Awaiting Response</span>
+                        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1.5 rounded-full uppercase tracking-widest">Awaiting Response</span>
                       </div>
                     );
                   })}
@@ -591,13 +591,13 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         
         return (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" onClick={() => setReviewProfileId(null)}>
-            <div className="bg-slate-900 border border-white/10 w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-200 relative" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setReviewProfileId(null)} className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors">
-                <X className="w-5 h-5 text-slate-400" />
+            <div className="bg-slate-900 border border-slate-200 dark:border-white/10 w-full max-w-sm rounded-3xl p-8 shadow-2xl animate-in zoom-in-95 duration-200 relative" onClick={e => e.stopPropagation()}>
+              <button onClick={() => setReviewProfileId(null)} className="absolute top-4 right-4 p-2 hover:bg-white/60 dark:bg-white/10 rounded-full transition-colors">
+                <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
               </button>
               
               <div className="flex flex-col items-center text-center mt-2">
-                <div className="w-24 h-24 bg-gradient-to-tr from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 rounded-2xl flex items-center justify-center text-4xl font-extrabold text-white mb-5 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+                <div className="w-24 h-24 bg-gradient-to-tr from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 rounded-2xl flex items-center justify-center text-4xl font-extrabold text-slate-900 dark:text-white mb-5 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
                   {reviewContact.full_name?.[0]}
                 </div>
                 
@@ -605,11 +605,11 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   {role}
                 </span>
                 
-                <h3 className="text-2xl font-extrabold text-white mb-2 leading-tight">
+                <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight">
                   {isOrg && reviewContact.org_name ? reviewContact.org_name : reviewContact.full_name}
                 </h3>
                 
-                <p className="text-sm text-slate-400 mb-6 font-medium">
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 font-medium">
                   {isOrg && reviewContact.org_name ? `Founder: ${reviewContact.full_name}` : reviewContact.email}
                 </p>
 
@@ -623,15 +623,15 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                 
                 {(isOrg && reviewContact.description) && (
                   <div className="bg-black/30 rounded-xl p-4 mb-6 border border-white/5 w-full">
-                    <p className="text-sm text-slate-300 italic">
+                    <p className="text-sm text-slate-600 dark:text-slate-300 italic">
                       "{reviewContact.description}"
                     </p>
                   </div>
                 )}
 
-                <div className="w-full bg-white/5 rounded-2xl p-4 border border-white/10 text-left">
+                <div className="w-full bg-white dark:bg-white/5 rounded-2xl p-4 border border-slate-200 dark:border-white/10 text-left">
                   <p className="text-xs text-slate-500 uppercase font-bold tracking-widest mb-1">Contact Email</p>
-                  <p className="text-sm text-white font-medium break-all">{reviewContact.email}</p>
+                  <p className="text-sm text-slate-900 dark:text-white font-medium break-all">{reviewContact.email}</p>
                 </div>
               </div>
             </div>

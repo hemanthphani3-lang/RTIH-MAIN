@@ -110,24 +110,24 @@ export default function Sidebar() {
   const links = getLinks();
 
   return (
-    <div className="w-64 h-screen bg-white/5 backdrop-blur-xl text-white flex flex-col fixed left-0 top-0 border-r border-white/10 shadow-2xl z-50">
+    <div className="w-64 h-screen bg-white/80 dark:bg-white/5 backdrop-blur-xl text-slate-900 dark:text-white flex flex-col fixed left-0 top-0 border-r border-slate-200 dark:border-white/10 shadow-xl dark:shadow-2xl z-50 transition-colors duration-300">
       <div className="p-6">
-        <h2 className="text-2xl font-extrabold text-[#FFD700] tracking-wider flex items-center gap-2">
+        <h2 className="text-2xl font-extrabold text-indigo-700 dark:text-[#FFD700] tracking-wider flex items-center gap-2 transition-colors duration-300">
           <Building className="w-6 h-6" /> RTIH
         </h2>
-        <p className="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">{role || "Loading..."}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-widest font-semibold transition-colors duration-300">{role || "Loading..."}</p>
       </div>
 
-      <nav className="flex-1 px-4 space-y-2 mt-4">
+      <nav className="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
         {links.map(link => {
           const Icon = link.icon;
           const active = pathname === link.path || (pathname.startsWith(link.path + "/") && link.path.length > 1 && link.path !== "/settings");
           return (
-            <Link key={link.name} href={link.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium relative ${active ? "bg-[#FFD700] text-black shadow-[0_0_15px_rgba(255,215,0,0.3)]" : "text-slate-300 hover:bg-white/5 hover:text-white"}`}>
+            <Link key={link.name} href={link.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium relative ${active ? "bg-indigo-600 dark:bg-[#FFD700] text-white dark:text-black shadow-lg shadow-indigo-600/30 dark:shadow-[0_0_15px_rgba(255,215,0,0.3)]" : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-indigo-700 dark:hover:text-white"}`}>
               <div className="relative">
                 <Icon className="w-5 h-5" />
                 {link.name === "Messages" && unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-black shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse"></span>
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white dark:border-black shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse"></span>
                 )}
               </div>
               <span className="flex-1">{link.name}</span>

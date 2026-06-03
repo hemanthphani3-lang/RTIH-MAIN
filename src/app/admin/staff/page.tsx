@@ -79,7 +79,7 @@ export default function AdminStaffPage() {
     setCreating(false);
   };
 
-  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Staff Directory...</div></DashboardLayout>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-slate-900 dark:text-white">Loading Staff Directory...</div></DashboardLayout>;
 
   const displayed = activeTab === "Mentor" ? mentors : managers;
 
@@ -88,10 +88,10 @@ export default function AdminStaffPage() {
       <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
 
         {/* Header */}
-        <div className="flex items-center justify-between bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+        <div className="flex items-center justify-between bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-6 rounded-3xl">
           <div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">Staff Management</h1>
-            <p className="text-slate-400 mt-1 text-sm flex items-center gap-2">
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Staff Management</h1>
+            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm flex items-center gap-2">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse inline-block"></span>
               Live — {mentors.length} Mentors · {managers.length} Managers
             </p>
@@ -105,20 +105,20 @@ export default function AdminStaffPage() {
 
         {/* Create Form */}
         {showForm && (
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 animate-in fade-in slide-in-from-top-4 duration-300">
-            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+          <div className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 animate-in fade-in slide-in-from-top-4 duration-300">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
               <Plus className="w-6 h-6 text-[#FFD700]" /> Create New Staff Account
             </h2>
             <form onSubmit={handleCreate} className="space-y-5">
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Role *</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Role *</label>
                 <div className="grid grid-cols-2 gap-3">
                   {(["Mentor", "Manager"] as const).map(r => (
                     <button type="button" key={r} onClick={() => setRole(r)}
                       className={`py-3 rounded-xl text-sm font-bold border transition-all flex items-center justify-center gap-2 ${
                         role === r
                           ? "bg-[#FFD700] text-black border-[#FFD700] shadow-[0_0_15px_rgba(255,215,0,0.3)]"
-                          : "bg-white/5 text-slate-300 border-white/10 hover:bg-white/10"
+                          : "bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:bg-white/60 dark:bg-white/10"
                       }`}>
                       {r === "Mentor" ? <ShieldCheck className="w-4 h-4" /> : <Briefcase className="w-4 h-4" />} {r}
                     </button>
@@ -128,32 +128,32 @@ export default function AdminStaffPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
                   <input required value={fullName} onChange={e => setFullName(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
                     placeholder="e.g. Dr. Arjun Sharma" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Email *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Email *</label>
                   <input required type="email" value={email} onChange={e => setEmail(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
                     placeholder="staff@rtih.com" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Password *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Password *</label>
                   <div className="relative">
                     <input required type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all pr-12"
+                      className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all pr-12"
                       placeholder="Min. 8 characters" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3.5 text-slate-400 hover:text-white transition-colors">
+                      className="absolute right-3 top-3.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Assigned Location *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Assigned Location *</label>
                   <div className="relative">
                     <select 
                       value={location} 
@@ -161,20 +161,20 @@ export default function AdminStaffPage() {
                         setLocation(e.target.value as LocationType);
                         setSelectedDomains([]); // reset domains when location changes
                       }}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer"
+                      className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-[#FFD700]/50 focus:outline-none transition-all appearance-none cursor-pointer"
                     >
                       {LOCATIONS.map(loc => (
                         <option key={loc} value={loc} className="bg-slate-900">{loc}</option>
                       ))}
                     </select>
-                    <MapPin className="absolute right-4 top-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <MapPin className="absolute right-4 top-3.5 w-4 h-4 text-slate-500 dark:text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Mentor Domains */}
                 {role === "Mentor" && (
-                  <div className="md:col-span-2 pt-2 border-t border-white/10 mt-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block flex items-center gap-2">
+                  <div className="md:col-span-2 pt-2 border-t border-slate-200 dark:border-white/10 mt-2">
+                    <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 block flex items-center gap-2">
                       Select Mentor Domains *
                     </label>
                     <div className="flex flex-wrap gap-3">
@@ -186,8 +186,8 @@ export default function AdminStaffPage() {
                             onClick={() => toggleDomain(domain)}
                             className={`flex items-center gap-2 px-4 py-2 rounded-xl border cursor-pointer transition-all ${
                               isSelected 
-                                ? "bg-[#FFD700]/10 border-[#FFD700]/30 text-white" 
-                                : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                                ? "bg-[#FFD700]/10 border-[#FFD700]/30 text-slate-900 dark:text-white" 
+                                : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:bg-white/10"
                             }`}
                           >
                             <span className="text-sm font-medium">{domain}</span>
@@ -208,11 +208,11 @@ export default function AdminStaffPage() {
         )}
 
         {/* Tabs */}
-        <div className="flex bg-white/5 backdrop-blur-xl border border-white/10 p-1.5 rounded-2xl w-fit gap-1">
+        <div className="flex bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-1.5 rounded-2xl w-fit gap-1">
           {(["Mentor", "Manager"] as const).map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
-                activeTab === tab ? "bg-[#FFD700] text-black shadow-[0_0_10px_rgba(255,215,0,0.3)]" : "text-slate-300 hover:text-white"
+                activeTab === tab ? "bg-[#FFD700] text-black shadow-[0_0_10px_rgba(255,215,0,0.3)]" : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:text-white"
               }`}>
               {tab === "Mentor" ? <ShieldCheck className="w-4 h-4" /> : <Briefcase className="w-4 h-4" />}
               {tab}s ({tab === "Mentor" ? mentors.length : managers.length})
@@ -223,13 +223,13 @@ export default function AdminStaffPage() {
         {/* Staff Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayed.length === 0 ? (
-            <div className="col-span-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-16 text-center">
+            <div className="col-span-3 bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-16 text-center">
               <Users className="w-12 h-12 text-slate-500 mx-auto mb-4" />
-              <p className="text-slate-400 font-medium">No {activeTab}s yet. Create one above.</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium">No {activeTab}s yet. Create one above.</p>
             </div>
           ) : (
             displayed.map((s: any, idx: number) => (
-              <div key={s.id || idx} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all flex flex-col">
+              <div key={s.id || idx} className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 hover:bg-white/60 dark:bg-white/10 transition-all flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#FFD700]/20 to-[#FFD700]/5 border border-[#FFD700]/20 rounded-2xl flex items-center justify-center">
                     <span className="text-[#FFD700] font-extrabold text-lg">
@@ -240,13 +240,13 @@ export default function AdminStaffPage() {
                     activeTab === "Mentor" ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20" : "bg-blue-500/10 text-blue-400 border-blue-500/20"
                   }`}>{activeTab}</span>
                 </div>
-                <h3 className="text-white font-bold text-lg">{s.user_profiles?.full_name}</h3>
-                <p className="text-slate-400 text-sm mt-1">{s.user_profiles?.email}</p>
+                <h3 className="text-slate-900 dark:text-white font-bold text-lg">{s.user_profiles?.full_name}</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{s.user_profiles?.email}</p>
                 
                 {/* Location Badge */}
                 {s.location && (
-                  <div className="mt-4 pt-4 border-t border-white/10 flex-grow">
-                    <span className="inline-flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 text-xs px-3 py-1.5 rounded-lg font-medium">
+                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/10 flex-grow">
+                    <span className="inline-flex items-center gap-1.5 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 text-xs px-3 py-1.5 rounded-lg font-medium">
                       <MapPin className="w-3.5 h-3.5 text-blue-400" /> {s.location}
                     </span>
                   </div>
@@ -254,7 +254,7 @@ export default function AdminStaffPage() {
                 
                 {/* Mentor Domains */}
                 {activeTab === "Mentor" && s.domains && s.domains.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-white/10 flex-grow">
+                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/10 flex-grow">
                     <div className="flex flex-wrap gap-2">
                       {s.domains.map((d: string) => (
                         <span key={d} className="bg-[#FFD700]/10 text-[#FFD700] border border-[#FFD700]/20 text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold">

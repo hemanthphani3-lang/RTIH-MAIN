@@ -82,7 +82,7 @@ export default function ManagerMentorsPage() {
     setCreating(false);
   };
 
-  if (loading) return <DashboardLayout><div className="p-8 text-center text-white">Loading Mentors...</div></DashboardLayout>;
+  if (loading) return <DashboardLayout><div className="p-8 text-center text-slate-900 dark:text-white">Loading Mentors...</div></DashboardLayout>;
 
   const allowedDomains = managerLocation ? LOCATION_DOMAINS[managerLocation] : [];
 
@@ -91,17 +91,17 @@ export default function ManagerMentorsPage() {
       <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20">
 
         {/* Header */}
-        <div className="flex items-center justify-between bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+        <div className="flex items-center justify-between bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-6 rounded-3xl">
           <div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">Mentor Management</h1>
-            <p className="text-slate-400 mt-1 text-sm flex items-center gap-2">
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Mentor Management</h1>
+            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm flex items-center gap-2">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse inline-block"></span>
               Live — {mentors.length} active mentors in the platform
             </p>
           </div>
           <div className="flex items-center gap-4">
             {managerLocation && (
-              <span className="hidden md:inline-flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 text-xs px-3 py-1.5 rounded-lg font-medium">
+              <span className="hidden md:inline-flex items-center gap-1.5 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 text-xs px-3 py-1.5 rounded-lg font-medium">
                 <MapPin className="w-3.5 h-3.5 text-blue-400" /> {managerLocation} Hub
               </span>
             )}
@@ -115,40 +115,40 @@ export default function ManagerMentorsPage() {
 
         {/* Create Form */}
         {showForm && (
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 animate-in fade-in slide-in-from-top-4 duration-300">
-            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+          <div className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 animate-in fade-in slide-in-from-top-4 duration-300">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
               <ShieldCheck className="w-6 h-6 text-[#FFD700]" /> Create New Mentor Account
             </h2>
             <form onSubmit={handleCreate} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Full Name *</label>
                   <input required value={fullName} onChange={e => setFullName(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
                     placeholder="e.g. Dr. Priya Nair" />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Email *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Email *</label>
                   <input required type="email" value={email} onChange={e => setEmail(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
+                    className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all"
                     placeholder="mentor@rtih.com" />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block">Password *</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Password *</label>
                   <div className="relative">
                     <input required type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all pr-12"
+                      className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white placeholder-slate-500 focus:border-[#FFD700]/50 focus:outline-none transition-all pr-12"
                       placeholder="Min. 8 characters" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3.5 text-slate-400 hover:text-white transition-colors">
+                      className="absolute right-3 top-3.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
                   </div>
                 </div>
 
                 {/* Domain Checkboxes based on Manager Location */}
-                <div className="md:col-span-2 pt-2 border-t border-white/10 mt-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block flex items-center gap-2">
+                <div className="md:col-span-2 pt-2 border-t border-slate-200 dark:border-white/10 mt-2">
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 block flex items-center gap-2">
                     Select Mentor Domains * 
                     <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md normal-case tracking-normal">
                       Restricted to {managerLocation} Hub
@@ -163,8 +163,8 @@ export default function ManagerMentorsPage() {
                           onClick={() => toggleDomain(domain)}
                           className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
                             isSelected 
-                              ? "bg-[#FFD700]/10 border-[#FFD700]/30 text-white" 
-                              : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                              ? "bg-[#FFD700]/10 border-[#FFD700]/30 text-slate-900 dark:text-white" 
+                              : "bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:bg-white/10"
                           }`}
                         >
                           {isSelected ? (
@@ -193,13 +193,13 @@ export default function ManagerMentorsPage() {
         {/* Mentor Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mentors.length === 0 ? (
-            <div className="col-span-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-16 text-center">
+            <div className="col-span-3 bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-16 text-center">
               <Users className="w-12 h-12 text-slate-500 mx-auto mb-4" />
-              <p className="text-slate-400 font-medium">No mentors yet. Create the first one!</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium">No mentors yet. Create the first one!</p>
             </div>
           ) : (
             mentors.map((m: any, idx: number) => (
-              <div key={idx} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all flex flex-col">
+              <div key={idx} className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 hover:bg-white/60 dark:bg-white/10 transition-all flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-indigo-500/20 to-indigo-500/5 border border-indigo-500/20 rounded-2xl flex items-center justify-center">
                     <span className="text-indigo-400 font-extrabold text-lg">
@@ -208,12 +208,12 @@ export default function ManagerMentorsPage() {
                   </div>
                   <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-bold px-3 py-1 rounded-full">Mentor</span>
                 </div>
-                <h3 className="text-white font-bold text-lg">{m.user_profiles?.full_name}</h3>
-                <p className="text-slate-400 text-sm mt-1">{m.user_profiles?.email}</p>
+                <h3 className="text-slate-900 dark:text-white font-bold text-lg">{m.user_profiles?.full_name}</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{m.user_profiles?.email}</p>
                 
                 {/* Mentor Domains */}
                 {m.domains && m.domains.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-white/10 flex-grow">
+                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/10 flex-grow">
                     <div className="flex flex-wrap gap-2">
                       {m.domains.map((d: string) => (
                         <span key={d} className="bg-[#FFD700]/10 text-[#FFD700] border border-[#FFD700]/20 text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold">

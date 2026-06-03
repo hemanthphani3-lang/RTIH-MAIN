@@ -72,7 +72,7 @@ export default function GovernanceCenterPage() {
                     <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs capitalize">
                       {log.entity_type}
                     </span>
-                    <div className="text-xs text-gray-400 mt-1 truncate w-24" title={log.entity_id}>
+                    <div className="text-xs text-slate-500 dark:text-gray-400 mt-1 truncate w-24" title={log.entity_id}>
                       {log.entity_id.split('-')[0]}...
                     </div>
                   </td>

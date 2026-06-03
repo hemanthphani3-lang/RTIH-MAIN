@@ -134,19 +134,19 @@ export default function AdminOrganizationsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
               <Building2 className="w-8 h-8 text-indigo-400" /> Startup Portfolio Management
             </h1>
-            <p className="text-slate-400 mt-1 text-sm">Control center for all organizations in the ecosystem.</p>
+            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">Control center for all organizations in the ecosystem.</p>
           </div>
           <div className="flex gap-3">
-            <button onClick={exportCSV} className="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+            <button onClick={exportCSV} className="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
               <ArrowDownToLine className="w-4 h-4" /> Export CSV
             </button>
             {selectedRowIds.size > 0 && (
               <div className="flex gap-2 animate-in slide-in-from-right-4">
-                <button onClick={() => handleBulkAction("REACTIVATE")} className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md">Approve Selected</button>
-                <button onClick={() => handleBulkAction("ARCHIVE")} className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md">Archive Selected</button>
+                <button onClick={() => handleBulkAction("REACTIVATE")} className="bg-green-600 hover:bg-green-500 text-slate-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md">Approve Selected</button>
+                <button onClick={() => handleBulkAction("ARCHIVE")} className="bg-red-600 hover:bg-red-500 text-slate-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md">Archive Selected</button>
               </div>
             )}
           </div>
@@ -154,16 +154,16 @@ export default function AdminOrganizationsPage() {
 
         {/* Analytics Cards */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-sm">
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Total</p>
-            <p className="text-3xl font-extrabold text-white">{analytics.total}</p>
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Total</p>
+            <p className="text-3xl font-extrabold text-slate-900 dark:text-white">{analytics.total}</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-sm">
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Active</p>
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Active</p>
             <p className="text-3xl font-extrabold text-indigo-400">{analytics.active}</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-sm">
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Pending</p>
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Pending</p>
             <p className="text-3xl font-extrabold text-yellow-400">{analytics.pending}</p>
           </div>
           <div className="bg-red-500/5 border border-red-500/20 rounded-2xl p-5 shadow-sm">
@@ -187,35 +187,35 @@ export default function AdminOrganizationsPage() {
               onChange={(e) => setAiPrompt(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAiSearch()}
               placeholder="Ask AI: 'Show me EV startups below health score 60' or 'Find high risk ideation phase startups'"
-              className="block w-full pl-12 pr-20 py-4 bg-black/40 border border-indigo-500/30 rounded-2xl text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
+              className="block w-full pl-12 pr-20 py-4 bg-slate-200 dark:bg-black/40 border border-indigo-500/30 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
             />
             <div className="absolute inset-y-0 right-2 flex items-center">
-              <button onClick={handleAiSearch} disabled={isAiSearching} className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md">
+              <button onClick={handleAiSearch} disabled={isAiSearching} className="bg-indigo-600 hover:bg-indigo-500 text-slate-900 dark:text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md">
                 {isAiSearching ? "Querying..." : "AI Search"}
               </button>
             </div>
           </div>
           
           <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center gap-2 text-slate-400 text-sm font-bold"><Filter className="w-4 h-4"/> Filters</div>
-            <select value={filters.stage} onChange={e => setFilters({...filters, stage: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-bold"><Filter className="w-4 h-4"/> Filters</div>
+            <select value={filters.stage} onChange={e => setFilters({...filters, stage: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Stages</option>
               {Object.keys(STAGE_BADGES).map(s => <option key={s} value={s}>{s}</option>)}
             </select>
-            <select value={filters.riskStatus} onChange={e => setFilters({...filters, riskStatus: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+            <select value={filters.riskStatus} onChange={e => setFilters({...filters, riskStatus: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Risk Levels</option>
               <option value="Low">Low Risk</option>
               <option value="Medium">Medium Risk</option>
               <option value="High">High Risk</option>
               <option value="Critical">Critical Risk</option>
             </select>
-            <select value={filters.status} onChange={e => setFilters({...filters, status: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+            <select value={filters.status} onChange={e => setFilters({...filters, status: e.target.value})} className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white">
               <option value="All">All Statuses</option>
               <option value="Approved">Active (Approved)</option>
               <option value="Pending">Pending</option>
               <option value="Archived">Archived</option>
             </select>
-            <input value={filters.search} onChange={e => setFilters({...filters, search: e.target.value})} placeholder="Search name/founder..." className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white flex-1 min-w-[200px]" />
+            <input value={filters.search} onChange={e => setFilters({...filters, search: e.target.value})} placeholder="Search name/founder..." className="bg-black/30 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white flex-1 min-w-[200px]" />
           </div>
         </div>
 
@@ -224,12 +224,12 @@ export default function AdminOrganizationsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-900 border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider font-bold">
+                <tr className="bg-slate-900 border-b border-slate-800 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-bold">
                   <th className="p-4 w-12 text-center">
                     <input type="checkbox" onChange={(e) => {
                       if(e.target.checked) setSelectedRowIds(new Set(orgs.map(o => o.id)));
                       else setSelectedRowIds(new Set());
-                    }} checked={orgs.length > 0 && selectedRowIds.size === orgs.length} className="rounded border-slate-700 bg-black/50 text-indigo-600 focus:ring-indigo-500" />
+                    }} checked={orgs.length > 0 && selectedRowIds.size === orgs.length} className="rounded border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
                   </th>
                   <th className="p-4">Organization</th>
                   <th className="p-4">Stage</th>
@@ -248,7 +248,7 @@ export default function AdminOrganizationsPage() {
                   orgs.map((org) => (
                     <tr key={org.id} className={`hover:bg-slate-800/50 transition-colors ${selectedRowIds.has(org.id) ? 'bg-indigo-900/10' : ''}`}>
                       <td className="p-4 text-center">
-                        <input type="checkbox" checked={selectedRowIds.has(org.id)} onChange={() => toggleRowSelection(org.id)} className="rounded border-slate-700 bg-black/50 text-indigo-600 focus:ring-indigo-500" />
+                        <input type="checkbox" checked={selectedRowIds.has(org.id)} onChange={() => toggleRowSelection(org.id)} className="rounded border-slate-700 bg-slate-200 dark:bg-black/50 text-indigo-600 focus:ring-indigo-500" />
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -256,20 +256,20 @@ export default function AdminOrganizationsPage() {
                             {org.name[0]}
                           </div>
                           <div>
-                            <p className="font-extrabold text-white">{org.name}</p>
-                            <p className="text-xs text-slate-400 font-medium">Founder: {org.founder?.full_name || 'N/A'}</p>
+                            <p className="font-extrabold text-slate-900 dark:text-white">{org.name}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Founder: {org.founder?.full_name || 'N/A'}</p>
                           </div>
                         </div>
                       </td>
                       <td className="p-4">
-                        <span className={`text-xs font-bold px-3 py-1 rounded-full border bg-white/5 border-white/10 text-slate-300`}>
+                        <span className={`text-xs font-bold px-3 py-1 rounded-full border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300`}>
                           {org.verified_stage || 'Ideation'}
                         </span>
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-2">
                           <Activity className={`w-4 h-4 ${org.health_score > 70 ? 'text-green-400' : org.health_score > 40 ? 'text-yellow-400' : 'text-red-400'}`} />
-                          <span className="font-extrabold text-white">{org.health_score || 0}</span>
+                          <span className="font-extrabold text-slate-900 dark:text-white">{org.health_score || 0}</span>
                         </div>
                       </td>
                       <td className="p-4">
@@ -289,7 +289,7 @@ export default function AdminOrganizationsPage() {
                         </div>
                       </td>
                       <td className="p-4 text-right">
-                        <button onClick={() => handleOpenDrawer(org.id)} className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1">
+                        <button onClick={() => handleOpenDrawer(org.id)} className="bg-white dark:bg-white/5 hover:bg-white/60 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1">
                           View <ChevronRight className="w-3 h-3" />
                         </button>
                       </td>
@@ -312,16 +312,16 @@ export default function AdminOrganizationsPage() {
           <>
             <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-10 sticky top-0">
               <div>
-                <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
                   {drawerData.name}
                   <span className={`text-[10px] uppercase px-2 py-0.5 rounded border ${drawerData.status === 'Approved' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>
                     {drawerData.status}
                   </span>
                 </h2>
-                <p className="text-sm text-slate-400 mt-1">Founder: {drawerData.founder?.full_name} ({drawerData.founder?.email})</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Founder: {drawerData.founder?.full_name} ({drawerData.founder?.email})</p>
               </div>
-              <button onClick={() => setSelectedOrgId(null)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                <X className="w-6 h-6 text-slate-400" />
+              <button onClick={() => setSelectedOrgId(null)} className="p-2 hover:bg-white/60 dark:bg-white/10 rounded-full transition-colors">
+                <X className="w-6 h-6 text-slate-500 dark:text-slate-400" />
               </button>
             </div>
 
@@ -331,11 +331,11 @@ export default function AdminOrganizationsPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Current Stage</p>
-                  <p className="text-xl font-extrabold text-white">{drawerData.verified_stage || 'Ideation'}</p>
+                  <p className="text-xl font-extrabold text-slate-900 dark:text-white">{drawerData.verified_stage || 'Ideation'}</p>
                 </div>
                 <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Health Score</p>
-                  <p className="text-xl font-extrabold text-white flex items-center gap-2">
+                  <p className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                     {drawerData.health_score || 0} 
                     <Activity className={`w-5 h-5 ${drawerData.health_score > 70 ? 'text-green-400' : 'text-red-400'}`} />
                   </p>
@@ -343,27 +343,27 @@ export default function AdminOrganizationsPage() {
               </div>
 
               {/* Startup Info Section */}
-              <section className="bg-black/20 border border-white/5 rounded-3xl p-6">
-                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Building2 className="w-4 h-4"/> Startup Information</h3>
+              <section className="bg-slate-100 dark:bg-black/20 border border-white/5 rounded-3xl p-6">
+                <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Building2 className="w-4 h-4"/> Startup Information</h3>
                 <div className="space-y-4 text-sm">
-                  <div><strong className="text-slate-400 block mb-1">Description:</strong> <span className="text-slate-200">{drawerData.description || 'N/A'}</span></div>
-                  <div><strong className="text-slate-400 block mb-1">Problem Statement:</strong> <span className="text-slate-200">{drawerData.problem_statement || 'N/A'}</span></div>
-                  <div><strong className="text-slate-400 block mb-1">Solution:</strong> <span className="text-slate-200">{drawerData.solution || 'N/A'}</span></div>
-                  <div><strong className="text-slate-400 block mb-1">Website:</strong> <a href={drawerData.website} target="_blank" className="text-indigo-400 hover:underline">{drawerData.website || 'N/A'}</a></div>
-                  <div><strong className="text-slate-400 block mb-1">Registered:</strong> <span className="text-slate-200">{new Date(drawerData.created_at).toLocaleDateString()}</span></div>
+                  <div><strong className="text-slate-500 dark:text-slate-400 block mb-1">Description:</strong> <span className="text-slate-200">{drawerData.description || 'N/A'}</span></div>
+                  <div><strong className="text-slate-500 dark:text-slate-400 block mb-1">Problem Statement:</strong> <span className="text-slate-200">{drawerData.problem_statement || 'N/A'}</span></div>
+                  <div><strong className="text-slate-500 dark:text-slate-400 block mb-1">Solution:</strong> <span className="text-slate-200">{drawerData.solution || 'N/A'}</span></div>
+                  <div><strong className="text-slate-500 dark:text-slate-400 block mb-1">Website:</strong> <a href={drawerData.website} target="_blank" className="text-indigo-400 hover:underline">{drawerData.website || 'N/A'}</a></div>
+                  <div><strong className="text-slate-500 dark:text-slate-400 block mb-1">Registered:</strong> <span className="text-slate-200">{new Date(drawerData.created_at).toLocaleDateString()}</span></div>
                 </div>
               </section>
 
               {/* Lifecycle & Milestones */}
-              <section className="bg-black/20 border border-white/5 rounded-3xl p-6">
-                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Target className="w-4 h-4"/> Lifecycle & Milestones</h3>
+              <section className="bg-slate-100 dark:bg-black/20 border border-white/5 rounded-3xl p-6">
+                <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Target className="w-4 h-4"/> Lifecycle & Milestones</h3>
                 <div className="space-y-3">
                   {drawerData.milestones?.length === 0 ? <p className="text-slate-500 text-sm">No milestones submitted yet.</p> : 
                     drawerData.milestones.map((m: any) => (
-                      <div key={m.id} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                      <div key={m.id} className="flex items-center justify-between p-3 bg-white dark:bg-white/5 rounded-xl border border-white/5">
                         <div>
-                          <p className="text-sm font-bold text-white">{m.milestone_title}</p>
-                          <p className="text-xs text-slate-400">{new Date(m.submitted_at).toLocaleDateString()}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white">{m.milestone_title}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">{new Date(m.submitted_at).toLocaleDateString()}</p>
                         </div>
                         <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded border ${m.status === 'Approved' || m.status === 'Verified' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>
                           {m.status}
@@ -375,14 +375,14 @@ export default function AdminOrganizationsPage() {
               </section>
 
               {/* Certifications */}
-              <section className="bg-black/20 border border-white/5 rounded-3xl p-6">
-                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Shield className="w-4 h-4"/> Certifications</h3>
+              <section className="bg-slate-100 dark:bg-black/20 border border-white/5 rounded-3xl p-6">
+                <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><Shield className="w-4 h-4"/> Certifications</h3>
                 {drawerData.certificates?.length === 0 ? <p className="text-slate-500 text-sm">No certificates issued.</p> : 
                   <div className="grid grid-cols-2 gap-3">
                     {drawerData.certificates.map((c: any) => (
                       <div key={c.id} className="bg-indigo-500/10 border border-indigo-500/20 p-3 rounded-xl">
                         <p className="text-sm font-bold text-indigo-400">{c.certificate_type}</p>
-                        <p className="text-xs text-slate-400 mt-1">{new Date(c.issue_date).toLocaleDateString()}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{new Date(c.issue_date).toLocaleDateString()}</p>
                       </div>
                     ))}
                   </div>
@@ -390,8 +390,8 @@ export default function AdminOrganizationsPage() {
               </section>
 
               {/* Activity Timeline */}
-              <section className="bg-black/20 border border-white/5 rounded-3xl p-6">
-                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><List className="w-4 h-4"/> Recent Activity</h3>
+              <section className="bg-slate-100 dark:bg-black/20 border border-white/5 rounded-3xl p-6">
+                <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest mb-4 flex items-center gap-2"><List className="w-4 h-4"/> Recent Activity</h3>
                 <div className="space-y-4 relative before:absolute before:inset-0 before:ml-2.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
                   {drawerData.timeline?.length === 0 ? <p className="text-slate-500 text-sm pl-8">No timeline events recorded.</p> : 
                     drawerData.timeline.map((t: any, i: number) => (
@@ -399,12 +399,12 @@ export default function AdminOrganizationsPage() {
                         <div className="flex items-center justify-center w-5 h-5 rounded-full border border-indigo-500 bg-slate-900 text-indigo-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                           <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>
                         </div>
-                        <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white/5 p-3 rounded-xl border border-white/10 shadow-sm">
+                        <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white dark:bg-white/5 p-3 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
                           <div className="flex items-center justify-between mb-1">
                             <h4 className="font-bold text-slate-200 text-sm">{t.event}</h4>
                             <time className="text-[10px] text-slate-500">{new Date(t.timestamp).toLocaleDateString()}</time>
                           </div>
-                          <p className="text-xs text-slate-400">{t.description}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">{t.description}</p>
                         </div>
                       </div>
                     ))
