@@ -177,7 +177,7 @@ export default function AdminOrganizationsPage() {
         </div>
 
         {/* AI Search & Filtering */}
-        <div className="bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-3xl p-6 shadow-xl space-y-4">
+        <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700/50 rounded-3xl p-6 shadow-xl space-y-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Sparkles className="h-5 w-5 text-indigo-400 animate-pulse" />
@@ -190,7 +190,7 @@ export default function AdminOrganizationsPage() {
               className="block w-full pl-12 pr-20 py-4 bg-slate-200 dark:bg-black/40 border border-indigo-500/30 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm"
             />
             <div className="absolute inset-y-0 right-2 flex items-center">
-              <button onClick={handleAiSearch} disabled={isAiSearching} className="bg-indigo-600 hover:bg-indigo-500 text-slate-900 dark:text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md">
+              <button onClick={handleAiSearch} disabled={isAiSearching} className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md">
                 {isAiSearching ? "Querying..." : "AI Search"}
               </button>
             </div>
@@ -220,7 +220,7 @@ export default function AdminOrganizationsPage() {
         </div>
 
         {/* Datatable */}
-        <div className="bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -303,14 +303,14 @@ export default function AdminOrganizationsPage() {
       </div>
 
       {/* Organization Detail Drawer */}
-      <div className={`fixed inset-y-0 right-0 w-full max-w-3xl bg-[#0f172a] shadow-[-10px_0_50px_rgba(0,0,0,0.5)] border-l border-slate-300 dark:border-slate-700 transform transition-transform duration-500 z-[100] flex flex-col ${selectedOrgId ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-y-0 right-0 w-full max-w-3xl bg-white dark:bg-[#0f172a] shadow-[-10px_0_50px_rgba(0,0,0,0.5)] border-l border-slate-300 dark:border-slate-700 transform transition-transform duration-500 z-[100] flex flex-col ${selectedOrgId ? 'translate-x-0' : 'translate-x-full'}`}>
         {drawerLoading ? (
           <div className="h-full flex items-center justify-center">
             <div className="animate-spin w-10 h-10 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full" />
           </div>
         ) : drawerData && (
           <>
-            <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-10 sticky top-0">
+            <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white/80 dark:bg-slate-900/50 backdrop-blur-md z-10 sticky top-0">
               <div>
                 <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
                   {drawerData.name}
@@ -329,11 +329,11 @@ export default function AdminOrganizationsPage() {
               
               {/* Grid 1: Basic Info & Health */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
+                <div className="bg-slate-100 dark:bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Current Stage</p>
                   <p className="text-xl font-extrabold text-slate-900 dark:text-white">{drawerData.verified_stage || 'Ideation'}</p>
                 </div>
-                <div className="bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
+                <div className="bg-slate-100 dark:bg-[#1e293b] rounded-2xl p-5 border border-slate-200 dark:border-slate-700/50">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Health Score</p>
                   <p className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
                     {drawerData.health_score || 0} 
