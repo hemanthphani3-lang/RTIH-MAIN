@@ -119,14 +119,15 @@ export async function getOrganizationDetails(orgId: string) {
         primary_domain:primary_domain_id(id, name),
         secondary_domains:organization_domains(domains(name)),
         assignments:mentorship_assignments(
-          id, assignment_date, status,
+          id, created_at,
           mentor:mentors(id, user_profiles!user_id(full_name))
         )
       `)
       .eq("id", orgId)
       .single();
 
-    if (error || !org) throw new Error("Organization not found");
+    if (error) throw new Error(error.message);
+    if (!org) throw new Error("Organization not found");
 
     // Fetch parallel data (milestones, certificates, opportunities, timeline)
     const [milestonesRes, certsRes, timelineRes] = await Promise.all([
