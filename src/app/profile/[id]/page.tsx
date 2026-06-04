@@ -526,7 +526,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                   {accepted.map(conn => {
                     const contact = getContact(conn);
                     return (
-                      <div key={conn.id} className="p-6 bg-[#0f172a] flex items-center justify-between hover:bg-slate-100 dark:bg-slate-800 transition-colors group">
+                      <div key={conn.id} className="p-6 bg-slate-50 dark:bg-[#0f172a] flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center justify-center font-bold text-indigo-400 text-xl shrink-0 group-hover:scale-105 transition-transform">
                             {(contact as any)?.full_name?.[0]}
