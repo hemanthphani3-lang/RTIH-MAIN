@@ -83,7 +83,7 @@ export default function AdminOrganizationsPage() {
     if (res.success) {
       setDrawerData(res.data);
     } else {
-      alert("Failed to load details");
+      alert("Failed to load details: " + res.error);
       setSelectedOrgId(null);
     }
     setDrawerLoading(false);

@@ -117,10 +117,10 @@ export async function getOrganizationDetails(orgId: string) {
         *,
         founder:founder_id(id, full_name, email),
         primary_domain:primary_domain_id(id, name),
-        secondary_domains:organization_domains(domain:domain_id(name)),
+        secondary_domains:organization_domains(domains(name)),
         assignments:mentorship_assignments(
           id, assignment_date, status,
-          mentor:mentor_id(id, user_profiles!mentors_user_id_fkey(full_name))
+          mentor:mentors(id, user_profiles!user_id(full_name))
         )
       `)
       .eq("id", orgId)
