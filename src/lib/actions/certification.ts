@@ -94,9 +94,10 @@ export async function getOrgCertificationStatus(orgId: string) {
       .order("created_at", { ascending: false })
       .limit(5);
 
-    const verifiedStage = org.verified_stage || org.stage || "Ideation";
+    const verifiedStageRaw = org.verified_stage || org.stage || "Ideation";
+    const verifiedStage = verifiedStageRaw.endsWith(" Stage") ? verifiedStageRaw.replace(" Stage", "") : verifiedStageRaw;
     const stageIndex = VENTURE_STAGES.indexOf(verifiedStage as VentureStage);
-    const nextStage = stageIndex < VENTURE_STAGES.length - 1 ? VENTURE_STAGES[stageIndex + 1] : null;
+    const nextStage = stageIndex !== -1 && stageIndex < VENTURE_STAGES.length - 1 ? VENTURE_STAGES[stageIndex + 1] : null;
 
     return {
       success: true,
