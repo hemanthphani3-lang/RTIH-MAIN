@@ -50,6 +50,9 @@ export async function calculateVentureHealth(orgId: string) {
     else if (newScore < 30) status = 'Critical';
 
     // 4. Update the Database
+    // Also update the organizations table since UI queries it from there
+    await supabaseAdmin.from("organizations").update({ health_score: newScore }).eq("id", orgId);
+
     // Fetch previous score to determine trend
     const { data: currentHealth } = await supabaseAdmin.from("health_scores").select("*").eq("organization_id", orgId).single();
     
