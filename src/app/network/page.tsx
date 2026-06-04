@@ -85,7 +85,7 @@ export default function NetworkPage() {
       <button
         onClick={(e) => { e.preventDefault(); handleConnect(uid); }}
         disabled={connecting === uid}
-        className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-slate-900 dark:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+        className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
       >
         <UserPlus className="w-3.5 h-3.5" />
         {connecting === uid ? "Sending..." : "Connect"}
@@ -128,12 +128,12 @@ export default function NetworkPage() {
 
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-500/20 to-purple-500/10 border border-indigo-500/30 p-8 rounded-3xl relative overflow-hidden">
-          <div className="absolute right-0 top-0 p-8 opacity-10"><Sparkles className="w-48 h-48 text-indigo-400" /></div>
+          <div className="absolute right-0 top-0 p-8 opacity-10"><Sparkles className="w-48 h-48 text-indigo-600 dark:text-indigo-400" /></div>
           <div className="relative z-10">
             <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
-              <Users className="w-8 h-8 text-indigo-400" /> Innovation Network
+              <Users className="w-8 h-8 text-indigo-600 dark:text-indigo-400" /> Innovation Network
             </h1>
-            <p className="text-indigo-200 mt-2 text-sm max-w-xl">
+            <p className="text-indigo-900 dark:text-indigo-200 mt-2 text-sm max-w-xl">
               Discover startups, mentors, and managers across the RTIH ecosystem. Connect and collaborate to accelerate your innovation journey.
             </p>
           </div>
