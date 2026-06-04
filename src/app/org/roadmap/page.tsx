@@ -67,7 +67,8 @@ export default function OrgRoadmapPage() {
 
   const org = data?.org;
   const activeRequest = data?.activeRequest;
-  const verifiedStage = org?.verifiedStage || "Ideation";
+  const verifiedStageRaw = org?.verifiedStage || "Ideation";
+  const verifiedStage = verifiedStageRaw.endsWith(" Stage") ? verifiedStageRaw.replace(" Stage", "") : verifiedStageRaw;
   const verifiedIndex = VENTURE_STAGES.indexOf(verifiedStage as VentureStage);
   const nextStage = org?.nextStage;
   const nextStageConfig = nextStage ? STAGE_CONFIG.find(s => s.stage === nextStage) : null;
@@ -150,24 +151,24 @@ export default function OrgRoadmapPage() {
               return (
                 <div key={stage} className="flex gap-5 relative">
                   {i !== VENTURE_STAGES.length - 1 && (
-                    <div className={`absolute left-6 top-14 bottom-[-24px] w-0.5 rounded-full ${isCompleted ? "bg-[#FFD700]" : "bg-white/60 dark:bg-white/10"}`} />
+                    <div className={`absolute left-6 top-14 bottom-[-24px] w-0.5 rounded-full ${isCompleted ? "bg-indigo-600 dark:bg-[#FFD700]" : "bg-slate-200 dark:bg-white/10"}`} />
                   )}
                   <div className="relative z-10 shrink-0">
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border-2 transition-all ${
-                      isCompleted ? "bg-[#FFD700] border-[#FFD700] text-black shadow-[0_0_20px_rgba(255,215,0,0.4)]" :
-                      isCurrent ? "bg-indigo-500/20 border-indigo-400 text-indigo-400" :
-                      "bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-600"
+                      isCompleted ? "bg-indigo-600 dark:bg-[#FFD700] border-indigo-600 dark:border-[#FFD700] text-white dark:text-black shadow-[0_0_20px_rgba(99,102,241,0.4)] dark:shadow-[0_0_20px_rgba(255,215,0,0.4)]" :
+                      isCurrent ? "bg-indigo-100 dark:bg-indigo-500/20 border-indigo-500 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400" :
+                      "bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-600"
                     }`}>
                       {isCompleted ? <CheckCircle2 className="w-6 h-6" /> : isCurrent ? <Rocket className="w-5 h-5 animate-pulse" /> : <Lock className="w-4 h-4" />}
                     </div>
                   </div>
-                  <div className={`pt-1.5 flex-1 ${isFuture ? "opacity-40" : ""}`}>
+                  <div className={`pt-1.5 flex-1 ${isFuture ? "opacity-50 dark:opacity-40" : ""}`}>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className={`text-lg font-extrabold ${isCurrent ? "text-indigo-300" : isCompleted ? "text-[#FFD700]" : "text-slate-500 dark:text-slate-400"}`}>
+                      <h3 className={`text-lg font-extrabold ${isCurrent ? "text-indigo-600 dark:text-indigo-300" : isCompleted ? "text-indigo-700 dark:text-[#FFD700]" : "text-slate-600 dark:text-slate-400"}`}>
                         {badge?.icon} {stage}
                       </h3>
-                      {isCompleted && <span className="text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded-full font-bold uppercase">Certified ✅</span>}
-                      {isCurrent && <span className="text-[10px] bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full font-bold uppercase animate-pulse">Active Stage</span>}
+                      {isCompleted && <span className="text-[10px] bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-300 dark:border-green-500/20 px-2 py-0.5 rounded-full font-bold uppercase">Certified ✅</span>}
+                      {isCurrent && <span className="text-[10px] bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-300 dark:border-indigo-500/20 px-2 py-0.5 rounded-full font-bold uppercase animate-pulse">Active Stage</span>}
                     </div>
                     <p className="text-slate-500 dark:text-slate-400 text-sm">
                       {isCompleted ? "Stage certified. Your venture has successfully passed this stage." :
