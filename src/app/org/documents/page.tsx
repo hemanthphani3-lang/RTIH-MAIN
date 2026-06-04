@@ -117,12 +117,12 @@ export default function OrgDocumentsPage() {
 
             <div className="space-y-5">
               <div>
-                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Document Name / Type</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 block">Document Title / Category</label>
                 <input
                   type="text"
                   value={documentType}
                   onChange={(e) => setDocumentType(e.target.value)}
-                  placeholder="e.g. Pitch Deck, User Research..."
+                  placeholder="e.g. Q1 Pitch Deck, Financial Projections..."
                   className="w-full bg-white dark:bg-black/50 border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-slate-900 dark:text-white text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all shadow-inner"
                 />
               </div>
