@@ -23,7 +23,8 @@ export async function getMilestonesForOrg(orgId: string) {
       .single();
     if (orgErr || !org) throw new Error("Organization not found");
 
-    const verifiedStage = org.verified_stage || org.stage || "Ideation";
+    const verifiedStageRaw = org.verified_stage || org.stage || "Ideation";
+    const verifiedStage = verifiedStageRaw.endsWith(" Stage") ? verifiedStageRaw.replace(" Stage", "") : verifiedStageRaw;
 
     // 2. Get static config for this stage
     const stageConfig = STAGE_CONFIG.find(s => s.stage === verifiedStage);

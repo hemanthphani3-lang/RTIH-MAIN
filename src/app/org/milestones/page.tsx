@@ -126,7 +126,7 @@ export default function OrgMilestonesPage() {
     const canSubmit = m.displayStatus === "Not Started" || m.displayStatus === "Rejected";
 
     return (
-      <div className={`bg-[#0f172a]/80 backdrop-blur-xl border rounded-2xl p-6 flex flex-col md:flex-row gap-5 transition-all hover:bg-[#1e293b]/80 group ${
+      <div className={`bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border rounded-2xl p-6 flex flex-col md:flex-row gap-5 transition-all hover:bg-slate-50 dark:hover:bg-[#1e293b]/80 group ${
         isVerified ? "border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.05)]" :
         isRejected ? "border-red-500/30" :
         isPending ? "border-yellow-500/20" :
@@ -248,7 +248,7 @@ export default function OrgMilestonesPage() {
           </div>
 
           {/* Next Recommended Action */}
-          <div className="md:col-span-4 bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+          <div className="md:col-span-4 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
