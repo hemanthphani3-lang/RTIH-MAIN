@@ -208,3 +208,18 @@ export async function updateStartupStatus(orgId: string, status: "Approved" | "R
   }
 }
 
+export async function uploadDocument(orgId: string, userId: string, documentType: string, fileUrl: string) {
+  try {
+    const { error } = await supabaseAdmin.from("documents").insert({
+      organization_id: orgId,
+      uploaded_by: userId,
+      document_type: documentType,
+      file_url: fileUrl
+    });
+    if (error) throw new Error(error.message);
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
